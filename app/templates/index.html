@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+    <div id="searchbox">
+            <div id="bannerlogo">
+                <img src="{{ url_for('static', filename='/images/bannerhome.png') }}">
+            </div>
+
+          <div id="searchinput">
+        <input class="form-control input-lg" id="inputlg" type="text">
+          </div>
+
+          <div id="searchbuttons">
+            <button type="button" class="btn btn-default">Search</button>
+              <button type="button" class="btn btn-default">Whats Popular</button>
+          </div>
+    </div>
+
+{% endblock %}

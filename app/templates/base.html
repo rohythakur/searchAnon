@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html>
+  <head>
+    <title>Search Engone</title>
 
-</body>
+       <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+       <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+  </head>
+
+  <body>
+
+<div id = "mainlayer">
+      <div id="topbar">
+
+    </div>
+
+      {% block content %}
+
+
+
+      {% endblock %}
+
+      <div id="bottombar">
+
+    </div>
+
+
+
+</div>
+  </body>
 </html>
