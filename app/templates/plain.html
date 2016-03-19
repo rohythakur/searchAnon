@@ -7,22 +7,12 @@
 
       <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
        <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/registerloginsecurity.css') }}">
   </head>
 
   <body>
 
-<div id = "mainlayer">
-      <div id="topbar">
-          <div id="loginregister">
-              <a href="{{ url_for('auth.login') }}">Login</a>
-              <a href="{{ url_for('auth.register') }}">Register</a>
 
-
-
-
-          </div>
-
-    </div>
 
       {% block content %}
 
@@ -34,8 +24,5 @@
 
     </div>
 
-
-
-</div>
   </body>
 </html>

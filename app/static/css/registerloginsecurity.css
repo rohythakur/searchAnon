@@ -1,0 +1,29 @@
+#topbar{
+    position: absolute;
+     width: 100%;
+     top: 0px;
+     height: 100px;
+
+     background-color: lightgrey;
+}
+
+#loginorregister{
+    position: absolute;
+     width: 50%;
+     margin-left: 20px;
+     top: 200px;
+     height: 100px;
+     font: 20px arial, sans-serif;
+     background-color: #ffffff;
+}
+
+#loginorregisterright{
+    position: absolute;
+     width: 50%;
+     top: 200px;
+
+     height: 100px;
+     left: 50%;
+     background-color: #ffffff;
+}
+

@@ -3,6 +3,25 @@ body {
   height: 1080px;
   background-color: #ffffff;
 }
+/* unvisited link */
+a:link {
+    color: red;
+}
+
+/* visited link */
+a:visited {
+    color: green;
+}
+
+/* mouse over link */
+a:hover {
+    color: hotpink;
+}
+
+/* selected link */
+a:active {
+    color: blue;
+}
 #topbar{
     position: fixed;
      width: 100%;
@@ -10,6 +29,14 @@ body {
      height: 100px;
 
      background-color: #ffffff;
+}
+#loginregister {
+    position:absolute;
+    right:10px;
+    width: 200px;
+    height: 40px;
+
+    background-color: #ffffff;
 }
 #mainlayer{
 
@@ -24,7 +51,7 @@ body {
      height:300px;
      z-index:15;
      top:40%;
-     left:45%;
+     left:40%;
      margin:-100px 0 0 -150px;
      background-color: #ffffff;
      text-align: center;
