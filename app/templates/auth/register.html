@@ -9,18 +9,23 @@
 
 
 
+    <div id="loginorregister">Login</div>
 
-<div class="page-header">
+
+
+    <div id="loginorregisterright">
+
+
     <h1>Register</h1>
-</div>
-<div class="col-md-4">
+
+
 <form method=post action="/auth/register">
   <dl>
     {{ render_field(form.username) }}
     {{ render_field(form.password) }}
     {{ render_field(form.password2) }}
 
-    {{ render_field(form.welcomeM) }}
+    {{ render_field(form.welcomeMessage) }}
 
     {{ render_field(form.pin) }}
 
@@ -31,8 +36,6 @@
 
 </form>
 </div>
-
- <a class="btn btn-danger" href="{{ url_for('index') }}">Continue</a>
 
 
 {% endblock %}

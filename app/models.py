@@ -15,6 +15,7 @@ class User(UserMixin, db.Model):
     password_hash  = db.Column(db.String(128))
     welcomeMessage = db.Column(db.Text())
     aboutme       = db.Column(db.Text())
+    pin            = db.Column(db.String(64))
 
 
 

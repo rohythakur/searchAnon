@@ -18,7 +18,7 @@ class RegistrationForm(Form):
     recaptcha = RecaptchaField('Are you human?',
         description="Type both words into the text box to prove that you are a human and not a computer program")
 
-    welcomeM = StringField('Welcome Message', validators=[Length(1, 64)])
+    welcomeMessage = StringField('Welcome Message', validators=[Length(1, 64)])
 
     pin = (StringField('Enter your personal pin', validators=[Length(4, 4)]))
     submit = SubmitField('Register')

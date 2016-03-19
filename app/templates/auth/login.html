@@ -16,7 +16,7 @@
 
     <div id="loginwindow">
 
-                <img src="{{ url_for('static', filename='/images/bclogo2.png') }}" width="50" height="50">
+                <img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="50" height="50">
             <form method="post" action="/auth/login">
               <dl>
                 {{ render_field(form.username, placeholder="username", autocomplete="off") }}
@@ -27,7 +27,7 @@
 
 
 
-                        <a href="{{ url_for('auth.register') }}" class="btn btn-info" role="button">Register</a>
+
 
                         <input class="btn btn-danger" type="submit" value=login>
             </form>

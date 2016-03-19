@@ -26,7 +26,7 @@ def login():
             if user is not None and user.verify_password(form.password.data):
                 login_user(user)
                 print (user)
-                return redirect(url_for('main.home'))
+                return redirect(url_for('index'))
 
             flash('Invalid username or password.')
 
@@ -44,7 +44,7 @@ def register():
         print "step 2 register"
         user = User(username=form.username.data,
                     password=form.password.data,
-                    welcomeM=form.welcomeM.data,
+                    welcomeMessage=form.welcomeMessage.data,
 
                     pin=form.pin.data)
         db.session.add(user)
@@ -77,7 +77,7 @@ def security(username):
             db.session.commit()
             print ("info updated")
 
-            return redirect(url_for('main.home'))
+            return redirect(url_for('main.index'))
     return render_template('/auth/security.html', user=user, form=form)
 
 

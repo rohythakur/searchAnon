@@ -59,14 +59,7 @@ a:active {
 
 
 }
-#bottombar{
-    position: fixed;
-     width: 100%;
-     bottom: 5px;
-     height: 40px;
 
-     background-color: #f2f2f2;
-}
 #bannerlogo{
 
 
@@ -85,5 +78,63 @@ a:active {
     margin-top: 30px;
      background-color: #ffffff;
 }
+
+#bottombar{
+    position: fixed;
+     width: 100%;
+     bottom: 5px;
+     height: 40px;
+
+   background-color: #f2f2f2;
+}
+
+#bottombar1 {
+    position: fixed;
+    width: 100px;
+    left: 20px;
+    bottom: 5px;
+    height: 40px;
+
+   background-color: #f2f2f2;
+
+}
+
+#bottombar2 {
+    position: fixed;
+    width: 100px;
+    left: 120px;
+    bottom: 5px;
+    height: 40px;
+
+   background-color: #f2f2f2;
+}
+#bottombar3 {
+    position: fixed;
+    left: 220px;
+    bottom: 5px;
+    height: 40px;
+    width: 100px;
+   background-color: #f2f2f2;
+
+}
+#bottombarspacer {
+    position: fixed;
+    left: 320px;
+    bottom: 5px;
+    height: 40px;
+    width: 500px;
+   background-color: #f2f2f2;
+
+}
+#bottombarspacer1 {
+     position: fixed;
+ right: 10px;
+    bottom: 5px;
+    height: 40px;
+    width: 500px;
+    background-color: #f2f2f2;
+
+}
+
 
 
