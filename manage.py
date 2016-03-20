@@ -5,7 +5,7 @@ import os
 from app import app, db
 
 
-##hello
+##helloas
 migrate = Migrate(app, db)
 manager = Manager(app)
 
