@@ -46,7 +46,7 @@ class LoginForm(Form):
         DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                                           'Usernames must have only letters, '
                                           'numbers, dots or underscores')], description="test")
-    password = PasswordField('', validators=[ DataRequired()])
+    password_hash = PasswordField('', validators=[ DataRequired()])
 
     submit = SubmitField('Login')
 
@@ -59,7 +59,7 @@ class LoginForm(Form):
             return False
 
         user = User.query.filter_by(username=self.username.data.lower()).first()
-        if user and user.verify_password(self.password.data):
+        if user and user.verify_password(self.password_hash.data):
             return True
 
         else:

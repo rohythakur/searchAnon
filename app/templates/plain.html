@@ -7,12 +7,18 @@
 
       <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
        <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/registerloginsecurity.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/loginregister.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/plain.css') }}">
   </head>
 
   <body>
 
+  <div id = 'topbar'>
+         <a href="{{ url_for('index') }}">
+        <img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="100px" height="100px">
+        </a>
 
+  </div>
 
       {% block content %}
 

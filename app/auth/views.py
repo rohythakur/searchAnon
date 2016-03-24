@@ -23,7 +23,7 @@ def login():
         if form.validate_on_submit():
 
             user = User.query.filter_by(username=form.username.data).first()
-            if user is not None and user.verify_password(form.password.data):
+            if user is not None and user.verify_password(form.password_hash.data):
                 login_user(user)
                 print (user)
                 return redirect(url_for('index'))

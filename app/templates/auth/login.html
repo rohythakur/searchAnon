@@ -1,12 +1,7 @@
 {% extends "plain.html" %}
 {% from "/auth/_formhelpers.html" import render_field %}
 {% block content %}
-  <div id = 'topbar'>
-         <a href="{{ url_for('index') }}">
-        <img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="100px" height="100px">
-        </a>
 
-  </div>
 
     <div id="loginorregister">Login</div>
 
@@ -20,7 +15,7 @@
             <form method="post" action="/auth/login">
               <dl>
                 {{ render_field(form.username, placeholder="username", autocomplete="off") }}
-                {{ render_field(form.password, placeholder="password", autocomplete="off") }}
+                {{ render_field(form.password_hash, placeholder="password", autocomplete="off") }}
 
               </dl>
 

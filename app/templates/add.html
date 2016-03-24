@@ -1,0 +1,22 @@
+{% extends "plain.html" %}
+{% from "/auth/_formhelpers.html" import render_field %}
+{% block content %}
+
+    <br><br><br><br><br><br><br><br>
+<form method=post action="/main/addurl">
+  <dl>
+    {{ render_field(form.link) }}
+    {{ render_field(form.title) }}
+    {{ render_field(form.keywords) }}
+
+    {{ render_field(form.description) }}
+
+
+
+
+  </dl>
+  <p><input class="btn btn-danger" type=submit value=Submit>
+
+</form>
+</div>
+{% endblock %}

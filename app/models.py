@@ -5,6 +5,14 @@ from flask import current_app, request, url_for
 from flask.ext.login import UserMixin, AnonymousUserMixin
 from app import db, login_manager
 
+##Todo Upgrade Item for better links
+
+class Item(db.Model):
+    __tablename__ = 'items'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(64))
+    link = db.Column(db.String(64))
+    description = db.Column(db.Text)
 
 
 
@@ -15,6 +23,8 @@ class User(UserMixin, db.Model):
     password_hash  = db.Column(db.String(128))
     welcomeMessage = db.Column(db.Text())
     aboutme       = db.Column(db.Text())
+    pgp           = db.Column(db.Text())
+
     pin            = db.Column(db.String(64))
 
 

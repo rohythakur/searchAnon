@@ -1,51 +1,15 @@
-from flask import render_template, redirect, url_for, g, flash, request, session
-from flask.ext.login import logout_user, current_user, login_required, login_user
+from flask import render_template, redirect, url_for, g, flash, request
+from flask.ext.login import logout_user, current_user
 from . import main
-from .forms import EditProfileForm
 from .. import db
-from ..models import User
 from app import login_manager, app
-
-
-from sqlalchemy.orm.exc import UnmappedInstanceError
-
+from ..models import Item
+from forms import addlinkForm
 
 
 @app.before_request
 def before_request():
     g.user = current_user
-
-
-def logout():
-    # remove the username from the session if it's there
-    try:
-       g.user.authenticated = False
-       flask_login.logout_user()
-
-       session.pop(username, None)
-       print ("sucessfully logged out")
-    except UnmappedInstanceError:
-       print ("failed logged out")
-    return redirect(url_for('auth.login'))
-
-
-
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/index', methods=['GET', 'POST'])
-
-def index():
-    print 'Should be running this index'
-
-    return render_template('index.html')
-
-
-
-
-
-
-
-
-
 
 
 
@@ -62,22 +26,50 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 @main.route('/contact', methods=['GET', 'POST'])
-@login_required
+
 def contact():
-    return render_template('main/contact.html', user=user)
+    return render_template('contact.html')
 
 
 
+@main.route('/about', methods=['GET', 'POST'])
+
+def about():
+    return render_template('about.html')
+
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
+def index():
+    return render_template('index.html')
+
+
+
+
+@main.route('/add', methods=['GET', 'POST'])
+def addurl():
+    form = addlinkForm(request.form, obj=current_user)
+    items = Item.query.all()
+    print items
+
+    print ("Create Item Page")
+    if request.method == 'POST':
+        items = Item(title=form.title.data,
+                    link=form.link.data,
+                    description=form.description.data,
+                    keywords=form.keywords.data,
+                    person = current_user.username
+                    )
+
+        db.session.add(items)
+        db.session.commit()
+        print ("Link Created")
+
+        return redirect(url_for('main.viewlink'))
+    return render_template('add.html', form=form)
+
+
+@main.route('/linkcreated', methods=['GET', 'POST'])
+def viewlink():
+
+    return render_template('add.html')
