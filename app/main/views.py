@@ -46,19 +46,18 @@ def index():
 
 
 
-@main.route('/add', methods=['GET', 'POST'])
+@main.route('/addurl', methods=['GET', 'POST'])
 def addurl():
-    form = addlinkForm(request.form, obj=current_user)
+    form = addlinkForm()
     items = Item.query.all()
-    print items
+
 
     print ("Create Item Page")
     if request.method == 'POST':
+        print "ovber here"
         items = Item(title=form.title.data,
                     link=form.link.data,
-                    description=form.description.data,
-                    keywords=form.keywords.data,
-                    person = current_user.username
+                    description=form.description.data
                     )
 
         db.session.add(items)
@@ -72,4 +71,4 @@ def addurl():
 @main.route('/linkcreated', methods=['GET', 'POST'])
 def viewlink():
 
-    return render_template('add.html')
+    return render_template('auth/viewlink.html')

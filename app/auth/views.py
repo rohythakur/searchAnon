@@ -20,6 +20,7 @@ def before_request():
 def login():
     form = LoginForm()
     if request.method == 'POST':
+        print 'Post'
         if form.validate_on_submit():
 
             user = User.query.filter_by(username=form.username.data).first()

@@ -2,12 +2,18 @@
 {% from "/auth/_formhelpers.html" import render_field %}
 {% block content %}
 
+        <div id="loginorregister">Login</div>
+
+
+
+    <div id="loginorregisterright">
+
     <br><br><br><br><br><br><br><br>
-<form method=post action="/main/addurl">
+<form method="post" action="/main/addurl">
   <dl>
     {{ render_field(form.link) }}
     {{ render_field(form.title) }}
-    {{ render_field(form.keywords) }}
+
 
     {{ render_field(form.description) }}
 
@@ -15,7 +21,7 @@
 
 
   </dl>
-  <p><input class="btn btn-danger" type=submit value=Submit>
+  <p><input class="btn btn-danger" type="submit" value='add'>
 
 </form>
 </div>
