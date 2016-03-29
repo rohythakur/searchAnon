@@ -3,7 +3,7 @@ from flask.ext.login import logout_user, current_user
 from . import main
 from .. import db
 from app import login_manager, app
-from ..models import Item
+from ..models import Item, User
 from forms import addlinkForm
 
 
@@ -71,4 +71,14 @@ def addurl():
 @main.route('/linkcreated', methods=['GET', 'POST'])
 def viewlink():
 
-    return render_template('auth/viewlink.html')
+    return render_template('search/viewlink.html')
+
+
+@main.route('/<username>', methods=['GET', 'POST'])
+def user(username):
+    user = User.query.filter_by(username=username).first()
+
+
+
+    return render_template('auth/viewperson.html', user=user)
+

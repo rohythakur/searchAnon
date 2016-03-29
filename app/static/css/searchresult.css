@@ -1,0 +1,98 @@
+#topBanner{
+     position: absolute;
+     width: 100%;
+     top: 1px;
+     height: 60px;
+     margin-left: -10px;
+
+     background-color: #f1f1f1;
+}
+
+#topsearchBox{
+     position: absolute;
+     width: 500px;
+     height: 40px;
+     top: 1px;
+     margin-top: 15px;
+     margin-left: 150px;
+     background-color: #f1f1f1;
+}
+
+#topName{
+     position: absolute;
+     width: 150px;
+     height: 40px;
+     top: 15px;
+
+     right: 150px;
+     background-color: #f1f1f1;
+}
+
+
+
+#marginLeft {
+     position: absolute;
+     width: 120px;
+     height: 1400px;
+     top: 61px;
+
+     margin-left: -10px;
+     background-color: #ffffff;
+}
+
+
+/* Search result box */
+#resultbox{
+     position: absolute;
+     width: 525px;
+     top: 10px;
+     height: 100px;
+
+     background-color: #ffffff;
+}
+
+#linkTitle{
+     position: absolute;
+     width: 512px;
+     top: 0;
+     height: 21px;
+
+     background-color: #ffffff;
+}
+
+#linkLink{
+     position: absolute;
+     width: 512px;
+     top: 0;
+     height: 21px;
+
+     background-color: #ffffff;
+}
+#linkDescription{
+     position: absolute;
+     width: 483px;
+     top: 0;
+     height: 33px;
+
+     background-color: #ffffff;
+}
+
+/* unvisited link */
+a:link {
+    color: red;
+}
+
+/* visited link */
+a:visited {
+    color: green;
+}
+
+/* mouse over link */
+a:hover {
+    color: hotpink;
+}
+
+/* selected link */
+a:active {
+    color: blue;
+}
