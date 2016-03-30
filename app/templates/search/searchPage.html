@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/searchresult.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+{% block content %}
+
+<div id="topBanner">
+   <img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="50px" height="50px">
+
+
+
+    <div id="topsearchbox">
+       <div class="col-lg-6">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+    </div> </div> </div>
+            <div id="topName">
+              {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('main.user', username=current_user.username) }}">{{ current_user.username }}</a>
+
+                        <a href="{{ url_for('auth.logout') }}">Log Out</a>
+
+              {% else %}
+                        <a href="{{ url_for('auth.login') }}">Login</a>
+                        <a href="{{ url_for('auth.register') }}">Register</a>
+
+                     {% endif %}
+
+           </div>
+
+
+</div>
+
+
+
+<div id="marginLeft"></div>
+{% endblock %}

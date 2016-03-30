@@ -13,17 +13,6 @@ def before_request():
 
 
 
-@main.route('/auth/index', methods=['GET', 'POST'])
-
-def logout():
-    # remove the username from the session if it's there
-    logout_user()
-    g.user.authenticated = False
-
-
-    print ("sucessfully logged out")
-
-    return redirect(url_for('auth.login'))
 
 
 @main.route('/contact', methods=['GET', 'POST'])
@@ -63,7 +52,7 @@ def addurl():
         db.session.add(items)
         db.session.commit()
         print ("Link Created")
-
+        ##TODO Add .onion end of link
         return redirect(url_for('main.viewlink'))
     return render_template('add.html', form=form)
 
@@ -71,14 +60,24 @@ def addurl():
 @main.route('/linkcreated', methods=['GET', 'POST'])
 def viewlink():
 
-    return render_template('search/viewlink.html')
+    return render_template('search/viewLink.html')
 
 
 @main.route('/<username>', methods=['GET', 'POST'])
 def user(username):
     user = User.query.filter_by(username=username).first()
-
+    ##TODO Add account details/password change
 
 
     return render_template('auth/viewperson.html', user=user)
+
+
+@main.route('/search', methods=['GET', 'POST'])
+def search():
+
+
+    ##TODO Add search results for loop
+    return render_template('search/searchPage.html')
+
+
 

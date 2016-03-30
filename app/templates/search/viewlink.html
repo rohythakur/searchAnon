@@ -1,26 +1,19 @@
-<link rel="stylesheet" href="{{ url_for('static', filename='css/searchresult.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+{% extends "base.html" %}
+
 {% block content %}
+    <div id="searchbox">
+            <div id="bannerlogo">
+                <img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="100px" height="100px">
+            </div>
 
-<div id="topBanner">
-   <img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="50px" height="50px">
+          <div id="searchinput">
+        <input class="form-control input-lg" id="inputlg" type="text">
+          </div>
 
+          <div id="searchbuttons">
+          <a href="{{ url_for('main.viewlink') }}">  <button type="button" class="btn btn-default">Search</button></a>
+              <button type="button" class="btn btn-default">Whats Popular</button>
+          </div>
+    </div>
 
-
-    <div id="topsearchbox">
-       <div class="col-lg-6">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for...">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
-          </span>
-    </div> </div> </div>
-
-           <div id="topName"><a href="{{ url_for('main.user', username=g.user.username) }}">{{ g.user.username }}</a>
-           </div>
-
-
-</div>
-
-<div id="marginLeft"></div>
 {% endblock %}

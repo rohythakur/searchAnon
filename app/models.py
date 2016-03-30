@@ -2,8 +2,9 @@ __author__ = 'eeamesX'
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app, request, url_for
-from flask.ext.login import UserMixin, AnonymousUserMixin
+from flask.ext.login import UserMixin, AnonymousUserMixin, current_user, logout_user, flash, login_user
 from app import db, login_manager
+
 
 ##Todo Upgrade Item for better links
 
@@ -64,7 +65,6 @@ class User(UserMixin, db.Model):
     def is_active(self):
         return True
 
-    @property
     def is_anonymous(self):
         return False
 

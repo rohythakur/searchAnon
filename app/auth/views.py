@@ -25,9 +25,12 @@ def login():
 
             user = User.query.filter_by(username=form.username.data).first()
             if user is not None and user.verify_password(form.password_hash.data):
+
                 login_user(user)
+                current_user.is_authenticated = True
                 print (user)
                 return redirect(url_for('index'))
+
 
             flash('Invalid username or password.')
 
@@ -86,11 +89,16 @@ def security(username):
 
 
 
-@auth.route('/logout')
+@auth.route("/logout", methods=["GET"])
 def logout():
     try:
-       g.user.authenticated = False
-       db.session.add(g.user)
-       db.session.commit()
+        user = current_user
+        user.authenticated = False
+        db.session.add(user)
+        db.session.commit()
+        logout_user()
+
+
     except UnmappedInstanceError:
        pass
+    return redirect(url_for('index'))
