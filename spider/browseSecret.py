@@ -11,7 +11,7 @@ Usage:
 """
 import sys
 from contextlib import closing
-
+from lxml.cssselect import CSSSelector
 import colorama  # $ pip install colorama
 import docopt  # $ pip install docopt
 import socks  # $ pip install PySocks
@@ -59,8 +59,16 @@ tor_process = stem.process.launch_tor_with_config(
     init_msg_handler=print_bootstrap_lines,
 )
 try:
-    print(term.format("\nChecking our endpoint:\n", term.Attr.BOLD))
-    print(term.format(query("http://pwoah7foa6au2pul.onion  "), term.Color.BLUE))
+    print(term.format("\nChecking our endpoint:\n"))
+    website = (term.format(query("http://lchudifyeqm4ldjj.onion/?ai=333142"), term.Color.BLUE))
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(website, "lxml")
+
+
+
+    #print soup.prettify()[0:10000]
+
+    print soup.title
 finally:
     if tor_process.poll() is None: # still running
         tor_process.terminate()  # stops tor
