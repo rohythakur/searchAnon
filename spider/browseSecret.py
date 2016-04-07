@@ -64,8 +64,7 @@ try:
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(website, "lxml")
 
-
-
+    ##TODO GRAB SPECIFIC PARTS OF A WEBSITE
     #print soup.prettify()[0:10000]
 
     print soup.title
