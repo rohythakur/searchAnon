@@ -1,7 +1,7 @@
 from flask import Blueprint
 
 
-main = Blueprint('main', __name__)
+search = Blueprint('search', __name__)
 
 
 

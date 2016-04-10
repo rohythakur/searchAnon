@@ -38,7 +38,12 @@ app.register_blueprint(main_blueprint, url_prefix='/main')
 from .auth import auth as auth_blueprint
 app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
+from .search import search as search_blueprint
+app.register_blueprint(search_blueprint, url_prefix='/search')
+
 from .main import views
 from .auth import views
+
+from .search import views
 
 from app import models
