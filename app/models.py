@@ -12,7 +12,7 @@ class Item(db.Model):
     __tablename__ = 'items'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64))
-    link = db.Column(db.String(64))
+    link = db.Column(db.String(64), unique=True)
     description = db.Column(db.Text)
 
 
