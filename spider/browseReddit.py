@@ -23,7 +23,7 @@ def add_bot():
                         x = idof['url']
 
                         if x.endswith('/'):
-
+                            ##TODO look and clean data going into db
                             print "adding " + x
                             links = Item(link=x)
                             db.session.add(links)
@@ -31,7 +31,7 @@ def add_bot():
 
                         else:
                             newx= x + "/"
-
+                            ##TODO look and clean data going into db
                             print "adding " + newx
                             links = Item(link=newx)
                             db.session.add(links)

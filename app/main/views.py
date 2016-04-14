@@ -43,10 +43,10 @@ def addurl():
 
     print ("Create Item Page")
     if request.method == 'POST':
-        print "ovber here"
-        items = Item(title=form.title.data,
-                    link=form.link.data,
-                    description=form.description.data
+        ##TODO ALLOW ONLY LINK ADDRESS
+
+        items = Item(
+                    link="HTTP://" + form.link.data.upper() + ".ONION/"
                     )
 
         db.session.add(items)
@@ -60,7 +60,7 @@ def addurl():
 @main.route('/linkcreated', methods=['GET', 'POST'])
 def viewlink():
 
-    return render_template('search/viewLink.html')
+    return render_template('search/viewlink.html')
 
 
 @main.route('/<username>', methods=['GET', 'POST'])
