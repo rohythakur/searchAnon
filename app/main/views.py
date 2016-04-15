@@ -39,20 +39,14 @@ def index():
 def addurl():
     form = addlinkForm()
     items = Item.query.all()
-
-
     print ("Create Item Page")
     if request.method == 'POST':
-        ##TODO ALLOW ONLY LINK ADDRESS
-
         items = Item(
                     link="HTTP://" + form.link.data.upper() + ".ONION/"
                     )
-
         db.session.add(items)
         db.session.commit()
         print ("Link Created")
-        ##TODO Add .onion end of link
         return redirect(url_for('main.viewlink'))
     return render_template('add.html', form=form)
 
