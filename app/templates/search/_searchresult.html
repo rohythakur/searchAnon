@@ -1,13 +1,14 @@
-    {% for post in posts %}
+    {% for link in links %}
 
 <div id="resultbox">
-    {% for domain in domain %}
-         <div id="linkTitle"></div>
-         <div id="linkLink"></div>
-        <div id="linkDescription"></div>
 
-    {% endfor %}
+         <div id="linkTitle">{{ link.title }} </div>
+         <div id="linkLink">{{ link.link }}</div>
+        <div id="linkDescription">{{ link.description }}</div>
+
+
 </div>
-
+    {{ pagination.info  }}
+       {{ pagination.links  }}
 
  {% endfor %}

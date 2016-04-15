@@ -1,21 +1,21 @@
 #topBanner{
      position: absolute;
-     width: 100%;
-     top: 1px;
+     width: 1050px;
+     top: -1px;
      height: 60px;
      margin-left: -10px;
 
-     background-color: #f1f1f1;
+     background-color: red;
 }
 
 #topsearchBox{
      position: absolute;
      width: 500px;
      height: 40px;
-     top: 1px;
+     top: -5px;
      margin-top: 15px;
-     margin-left: 150px;
-     background-color: #f1f1f1;
+     margin-left: 170px;
+     background-color: darkmagenta;
 }
 
 #topName{
@@ -24,8 +24,8 @@
      height: 40px;
      top: 15px;
 
-     right: 150px;
-     background-color: #f1f1f1;
+     right: 50px;
+     background-color: darkcyan;
 }
 
 
@@ -37,44 +37,84 @@
      top: 61px;
 
      margin-left: -10px;
-     background-color: #ffffff;
+     background-color: blue;
+}
+
+#resultContainer {
+     position: absolute;
+     width: 600px;
+     height: 1400px;
+     top: 61px;
+
+     margin-left: 130px;
+     background-color: coral;
 }
 
 
+#sideContainer {
+     position: absolute;
+     width: 300px;
+     height: 1400px;
+     top: 61px;
+
+     margin-left: 740px;
+     background-color: blue;
+}
+
+#spaceResults {
+     position: relative;
+     width: 600px;
+     height: 50px;
+
+
+     margin-left: 10px;
+     background-color: lightgreen;
+}
+
+#topResultspacer {
+     position: relative;
+     width: 600px;
+     height: 50px;
+
+     top: 0px;
+     margin-left: 0px;
+     background-color: pink;
+}
 /* Search result box */
 #resultbox{
-     position: absolute;
+     position: relative;
      width: 525px;
-     top: 10px;
-     height: 100px;
+     margin-left: 10px;
+     margin-top: 75px;
+     height: 140px;
 
-     background-color: #ffffff;
+     background-color: white;
 }
 
 #linkTitle{
      position: absolute;
-     width: 512px;
+     width: 523px;
      top: 0;
-     height: 21px;
+     height: 30px;
 
-     background-color: #ffffff;
+     background-color: blueviolet;
 }
 
 #linkLink{
      position: absolute;
-     width: 512px;
-     top: 0;
-     height: 21px;
+     width: 523px;
+     top: 30px;
+     height: 30px;
 
-     background-color: #ffffff;
+     background-color: crimson;
 }
 #linkDescription{
      position: absolute;
-     width: 483px;
-     top: 0;
-     height: 33px;
+     width: 523px;
+     top: 60px;
+     height: 75px;
 
-     background-color: #ffffff;
+     background-color: yellow;
 }
 
 /* unvisited link */
@@ -95,4 +135,23 @@ a:hover {
 /* selected link */
 a:active {
     color: blue;
+}
+
+
+
+/* Pagination */
+.pagination-page-info {
+    padding: .6em;
+    padding-left: 0;
+    width: 40em;
+    margin: .5em;
+    margin-left: 0;
+    font-size: 12px;
+}
+.pagination-page-info b {
+    color: black;
+    background: #6aa6ed;
+    padding-left: 2px;
+    padding: .1em .25em;
+    font-size: 150%;
 }

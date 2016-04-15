@@ -12,9 +12,6 @@ def before_request():
     g.user = current_user
 
 
-
-
-
 @main.route('/contact', methods=['GET', 'POST'])
 
 def contact():
@@ -64,14 +61,5 @@ def user(username):
 
 
     return render_template('auth/viewperson.html', user=user)
-
-
-@main.route('/search', methods=['GET', 'POST'])
-def search():
-
-
-    ##TODO Add search results for loop
-    return render_template('search/searchPage.html')
-
 
 
