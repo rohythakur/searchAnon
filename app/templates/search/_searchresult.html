@@ -1,14 +1,16 @@
-    {% for link in links %}
+    {% for link in links.iter_pages() %}
 
 <div id="resultbox">
 
-         <div id="linkTitle">{{ link.title }} </div>
+         <div id="linkTitle">{{ loop.index + (page - 1) * per_page }} </div>
          <div id="linkLink">{{ link.link }}</div>
         <div id="linkDescription">{{ link.description }}</div>
 
 
 </div>
 
- {% endfor %}
-   {{ pagination.info  }}
+       {{ pagination.info  }}
        {{ pagination.links  }}
+
+
+ {% endfor %}
