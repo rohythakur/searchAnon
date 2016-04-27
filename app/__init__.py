@@ -37,6 +37,9 @@ app.register_blueprint(auth_blueprint, url_prefix='/auth')
 from .search import search as search_blueprint
 app.register_blueprint(search_blueprint, url_prefix='/search')
 
+from .spider import spider as spider_blueprint
+app.register_blueprint(spider_blueprint, url_prefix='/spider')
+
 from .main import views
 from .auth import views
 

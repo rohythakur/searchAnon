@@ -13,9 +13,3 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
-PER_PAGE = 10
-CSS_FRAMEWORK = 'bootstrap3'
-LINK_SIZE = 'sm'
-
-# decide whether or not a single page returns pagination
-SHOW_SINGLE_PAGE = False
