@@ -17,7 +17,7 @@ def before_request():
 
 @search.route('/search')
 def search():
-    ##TODO Search returning 69 results instead of 10
+
     search = False
     q = request.args.get('q')
     if q:
