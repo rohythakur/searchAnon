@@ -25,14 +25,14 @@ def search():
 
 
     page = int(request.args.get('page', 1))
-    per_page = 10
+    PER_PAGE = 10
     inner_window = 10
     outer_window = 10
-    offset = page * 10
-    links = Item.query.all()
+    offset = page * 1
+    links = Item.query.paginate(page, 10, True)
     total = Item.query.count()
     pagination = get_pagination(page=page,
-                                 per_page=per_page,
+                                 per_page=PER_PAGE,
                                 offset=offset,
 
                                 inner_window=inner_window,
@@ -40,15 +40,14 @@ def search():
                                 search=search,
 
 
-                            total = total,        #total number of results
-                            format_total=True,   #format total. example 1,024
-                            format_number=True,  #turn on format flag
-                            record_name='links',
-                           #provide context
-                            )
-    #links  = Item.query.filter(Item.title.like == x or Item.link.like == y)
+                                total = total,        #total number of results
+                                format_total=True,   #format total. example 1,024
+                                format_number=True,  #turn on format flag
+                                record_name='links',
 
-    return render_template('search/searchPage.html', links=links, pagination=pagination, per_page=per_page, page=page)
+                            )
+
+    return render_template('search/searchPage.html', links=links, pagination=pagination, page=page, per_page = PER_PAGE)
 
 
 
@@ -63,7 +62,16 @@ def show_single_page_or_not():
     return True
 
 
+def get_page_items():
+    page = int(request.args.get('page', 1))
+    per_page = request.args.get('per_page')
+    if not per_page:
+        per_page = current_app.config.get('PER_PAGE', 10)
+    else:
+        per_page = int(per_page)
 
+    offset = (page - 1) * per_page
+    return page, per_page, offset
 
 def get_pagination(**kwargs):
     kwargs.setdefault('record_name', 'repositories')

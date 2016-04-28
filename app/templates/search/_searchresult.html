@@ -1,10 +1,10 @@
-    {% for link in links %}
+    {% for link in links.items %}
 
 <div id="resultbox">
 
          <div id="linkTitle">{{ loop.index + (page - 1) * per_page }} </div>
-         <div id="linkLink">{{ link.link }}</div>
-        <div id="linkDescription">{{ link.description }}</div>
+         <div id="linkLink">{{ link.link | safe }}</div>
+        <div id="linkDescription">{{ link.description | safe }}</div>
 
 
 </div>

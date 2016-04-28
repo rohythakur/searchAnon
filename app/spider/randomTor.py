@@ -20,6 +20,7 @@ from sockshandler import SocksiPyHandler  # see pysocks repository
 from stem.util import term
 import random
 import string
+import socket
 import os, random
 from bs4 import BeautifulSoup
 
@@ -70,25 +71,26 @@ class randomLink():
     )
     while True:
         try:
-
-
-
             x = str("http://" + id_generator() + ".onion/")
-            #x = str('HTTP://PLATZGN27WKRKF4T.ONION/')
-            #x = os.system (random.choice(['HTTP://63M6CPQCNBE56PY5.ONION/', 'HTTP://VISITORFI5KL7Q7I.ONION/']))
-
+            #TESTCONNECTION
+            # x = str('HTTP://PLATZGN27WKRKF4T.ONION/')
+            #
             website = (term.format(query(x), term.Color.BLUE))
-           ##TODO ONLY PRINTY IF FOUND
+            soup = BeautifulSoup(website, "html.parser")
+            ##TODO GRAB SPECIFIC PARTS OF A WEBSITE
+            #print soup.prettify()[0:20000]
+            try:
+                tit = soup.title
+                if tit == None:
+                    pass
 
-                print(term.format("\nFound random website:\n"))
-                print x
-
-                soup = BeautifulSoup(website, "lxml")
-
-                ##TODO GRAB SPECIFIC PARTS OF A WEBSITE
-                print soup.prettify()[0:20000]
-
-                print soup.title
+                elif soup.title != None:
+                    print(term.format("\nTryingrandom website:  \n" + x))
+                    print soup.prettify()[0:20000]
+                    for link in soup.find_all('a'):
+                        print(link.get('href'))
+            except Exception as e:
+                print str(e)
 
 
         finally:
