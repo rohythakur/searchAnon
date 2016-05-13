@@ -9,6 +9,7 @@ Usage:
 
 
 """
+
 import sys
 from contextlib import closing
 from lxml.cssselect import CSSSelector
