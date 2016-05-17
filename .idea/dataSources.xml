@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2512830922">
-    <data-source source="LOCAL" name="app" uuid="36f0a4b7-ff95-41eb-b8a2-3f004e026956">
-      <driver-ref>7d91dbe1-f952-404f-aefe-f88211d2673f</driver-ref>
+  <component name="DataSourceManagerImpl" format="xml" hash="1996045346">
+    <data-source source="LOCAL" name="app" uuid="39fe1403-56ed-4bde-9930-b9707a4954cb">
+      <driver-ref>b9c807f5-0acd-4e93-86e5-2b2d9604978e</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>SQLite</remarks>
@@ -16,7 +16,7 @@
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/xerial-sqlite-license.txt</url>
         </library>
         <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/sqlite-jdbc-3.8.9.jar</url>
+          <url>file://$USER_HOME$/Desktop/sqlite-jdbc-3.8.7.jar</url>
         </library>
       </libraries>
     </data-source>
