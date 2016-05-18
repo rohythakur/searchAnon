@@ -34,14 +34,12 @@ for u in Item.query.with_entities(Item.link):
             soup = BeautifulSoup(html, "html5lib")
             currentlink = str(u)
             print (currentlink + " this is the currentlink")
-            for tag in soup.find_all('title'):
-                x = (tag.text)
+            currentrequest = Item.query.filter(Item.link == currentlink)
+            print link.member_since
+            x = currentrequest.title['a']
 
-                currentrequest = Item.query.filter(Item.link==currentlink)
-                print (str(currentrequest))
-                currentrequest.title = u'hello'
-
-                db.session.commit()
+            db.session.add(x)
+            db.session.commit()
 
 
     if __name__ == '__main__':
