@@ -8,8 +8,8 @@ from search.urlPrint import *
 from search.grabHtml import *
 from app.models import Item
 from app import db
+from pprint import pprint
 
-link = Item.query.all()
 
 
 for u in Item.query.with_entities(Item.link):
@@ -28,17 +28,25 @@ for u in Item.query.with_entities(Item.link):
         for resource in keys:
             browser.get(urls_map.get(resource))
             #printUrls(browser)
-            print (str(u))
+
             html = browser.page_source
 
             soup = BeautifulSoup(html, "html5lib")
             currentlink = str(u)
-            print (currentlink + " this is the currentlink")
-            currentrequest = Item.query.filter(Item.link == currentlink)
-            print link.member_since
-            x = currentrequest.title['a']
+            print (currentlink)
 
-            db.session.add(x)
+            x =  Item.query.filter_by(link=u).first()
+            print x.link
+            souptitle = soup.title
+
+
+
+
+
+
+
+
+
             db.session.commit()
 
 

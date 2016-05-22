@@ -13,16 +13,18 @@ fname =  datetime.now().strftime("%Y%m%d-%H%M%S") + ".txt"
 subdir = '/home/logic/Documents/data'
 
 
-def printhtml(browser, u):
+def printhtml(browser, u, link):
     html = browser.page_source
 
     soup = BeautifulSoup(html, "html5lib")
     currentlink = str(u)
+
+
     print (currentlink + " this is the currentlink")
     for tag in soup.find_all('title'):
         x = (tag.text)
         #print (x)
-        #session = sessionmaker()
+
         currentrequest = db.session.query(Item).get(currentlink).update({"title": "hello"})
         currentrequest.title = 'hello'
         db.session.commit()

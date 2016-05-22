@@ -1,6 +1,6 @@
 from app import app
 
-print "Running server boss"
+
 
 DEBUG = True
 PORT = 5000

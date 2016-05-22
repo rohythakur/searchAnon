@@ -20,6 +20,16 @@ class Item(db.Model):
     member_since = db.Column(db.DateTime(), default=datetime.utcnow)
 
 
+    def __init__(self, title, link, description, member_since):
+        self.title = title
+        self.link = link
+        self.description = description
+        self.member_since = member_since
+
+
+    def __repr__(self):
+        return '<User %r>' % self.link
+
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
