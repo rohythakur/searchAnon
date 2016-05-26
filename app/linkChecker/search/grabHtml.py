@@ -1,33 +1,34 @@
 
-from __future__ import print_function
 from datetime import datetime
-import os
 from bs4 import BeautifulSoup
-from sqlalchemy.orm import sessionmaker
-
-from app.models import Item
 from app import db
+from app.models import Item
+
+
 
 
 fname =  datetime.now().strftime("%Y%m%d-%H%M%S") + ".txt"
 subdir = '/home/logic/Documents/data'
 
 
-def printhtml(browser, u, link):
+def printhtml(browser, u):
     html = browser.page_source
 
     soup = BeautifulSoup(html, "html5lib")
-    currentlink = str(u)
 
+    currentlink = u[0]
 
-    print (currentlink + " this is the currentlink")
-    for tag in soup.find_all('title'):
-        x = (tag.text)
-        #print (x)
+    x = Item.query.filter_by(link=currentlink).first()
 
-        currentrequest = db.session.query(Item).get(currentlink).update({"title": "hello"})
-        currentrequest.title = 'hello'
-        db.session.commit()
+    try:
+
+        x.title = str(soup.title.string)
+
+        print(soup.get_text("|", strip=True))
+    except Exception as e:
+        print(str(e))
+
+    db.session.commit()
 
 
 
