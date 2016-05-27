@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from app import db
 from app.models import Item
 
-
+import urlparse
 
 
 fname =  datetime.now().strftime("%Y%m%d-%H%M%S") + ".txt"
@@ -24,13 +24,12 @@ def printhtml(browser, u):
 
         x.title = str(soup.title.string)
 
-        print(soup.get_text("|", strip=True))
+        x.description = (soup.get_text("|", strip=True))
+
+
     except Exception as e:
         print(str(e))
 
     db.session.commit()
-
-
-
 
 
