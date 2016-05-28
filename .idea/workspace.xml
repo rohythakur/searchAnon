@@ -76,9 +76,11 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/main/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
-              <folding />
+            <state relative-caret-position="714">
+              <caret line="42" column="20" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#71#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,7 +105,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="linkChecker" />
+        <entry key="$PROJECT_DIR$" value="de97863336e6652318423ae8b4d1f6c1a472d6f6" />
       </map>
     </option>
   </component>
@@ -896,7 +898,14 @@
       <option name="project" value="LOCAL" />
       <updated>1464317949338</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Working search, etyc">
+      <created>1464478157090</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1464478157090</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView">
@@ -970,7 +979,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test" />
     <MESSAGE value="Added URL Submit page/form/view" />
     <MESSAGE value="Added URL Submit page/form/view..part 2" />
     <MESSAGE value="Added Search Results Page" />
@@ -995,7 +1003,8 @@
     <MESSAGE value="Updating rows in database from links" />
     <MESSAGE value="Working updating rows-pre adding data functions" />
     <MESSAGE value="Adding more information to database, improved txt ingester" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding more information to database, improved txt ingester" />
+    <MESSAGE value="Working search, etyc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working search, etyc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1121,6 +1130,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="4" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+          <folding>
+            <element signature="e#23#96#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1260,9 +1272,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/main/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
-          <folding />
+        <state relative-caret-position="714">
+          <caret line="42" column="20" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#71#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
