@@ -80,62 +80,6 @@
      margin-left: 0px;
      background-color: pink;
 }
-/* Search result box */
-#resultbox{
-     position: relative;
-     width: 525px;
-     margin-left: 10px;
-     margin-top: 10px;
-     height: 140px;
-
-     background-color: white;
-}
-
-#linkTitle{
-     position: absolute;
-     width: 523px;
-     top: 0;
-     height: 30px;
-
-     background-color: blueviolet;
-}
-
-#linkLink{
-     position: absolute;
-     width: 523px;
-     top: 30px;
-     height: 30px;
-
-     background-color: crimson;
-}
-#linkDescription{
-     position: absolute;
-     width: 523px;
-     top: 60px;
-     height: 75px;
-
-     background-color: yellow;
-}
-
-/* unvisited link */
-a:link {
-    color: red;
-}
-
-/* visited link */
-a:visited {
-    color: green;
-}
-
-/* mouse over link */
-a:hover {
-    color: hotpink;
-}
-
-/* selected link */
-a:active {
-    color: blue;
-}
 
 
 

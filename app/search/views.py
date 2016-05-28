@@ -1,12 +1,12 @@
 from flask import render_template, redirect, url_for, g, flash, request, current_app
 from . import search
-from .. import main
+#from .. import main
 from .. import db
 from app import app
 from flask_login import current_user, current_app
 from ..models import Item, User
 from flask.ext.paginate import Pagination
-
+from .forms import searchForm
 import click
 
 
@@ -15,9 +15,12 @@ def before_request():
     g.user = current_user
 
 
-@search.route('/search')
+@search.route('/search', methods=['GET', 'POST'])
 def search():
+    form = searchForm()
+    search_term = form.searchString.data
 
+    print search_term
     search = False
     q = request.args.get('q')
     if q:
@@ -29,7 +32,11 @@ def search():
     inner_window = 10
     outer_window = 10
     offset = page * 1
-    links = Item.query.paginate(page, 10, True)
+
+
+    links = Item.query.filter(Item.title.like('%' +search_term + '%')).paginate(page, 10, True)
+
+
     total = Item.query.count()
     pagination = get_pagination(page=page,
                                  per_page=PER_PAGE,
@@ -47,7 +54,7 @@ def search():
 
                             )
 
-    return render_template('search/searchPage.html', links=links, pagination=pagination, page=page, per_page = PER_PAGE)
+    return render_template('search/searchPage.html', form=form, links=links, pagination=pagination, page=page, per_page = PER_PAGE)
 
 
 

@@ -5,6 +5,7 @@ from .. import db
 from app import login_manager, app
 from ..models import Item, User
 from forms import addlinkForm
+from ..search.forms import searchForm
 
 
 @app.before_request
@@ -27,7 +28,8 @@ def about():
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    form = searchForm()
+    return render_template('index.html', form=form)
 
 
 

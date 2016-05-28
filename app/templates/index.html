@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "/search/_formhelpers.html" import render_field %}
 
 {% block content %}
     <div id="searchbox">
@@ -7,13 +8,19 @@
             </div>
 
           <div id="searchinput">
-        <input class="form-control input-lg" id="inputlg" type="text">
-          </div>
+              <form method=post action="/search/search">
+                {{ render_field(form.searchString, placeholder="Search Onions", autocomplete="off") }}
 
+
+              </div>
           <div id="searchbuttons">
-          <a href="{{ url_for('search.search') }}">  <button type="button" class="btn btn-default">Search</button></a>
-              <button type="button" class="btn btn-default">Whats Popular</button>
-          </div>
+                <input class="btn btn-danger" type="submit" value=Search>
+               <button type="button" class="btn btn-default">Whats Popular</button>
+                        </div>
     </div>
+
+
+        </form>
+
 
 {% endblock %}

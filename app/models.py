@@ -18,14 +18,17 @@ class Item(db.Model):
     link = db.Column(db.String(64), unique=True)
     description = db.Column(db.Text)
     member_since = db.Column(db.DateTime(), default=datetime.utcnow)
+    last_updated = db.Column(db.DateTime(), default=datetime.utcnow)
+    click_count = db.Column(db.Integer())
 
 
-    def __init__(self, title, link, description, member_since):
+    def __init__(self, title, link, description, member_since, last_updated, click_count):
         self.title = title
         self.link = link
         self.description = description
         self.member_since = member_since
-
+        self.last_updated = last_updated
+        self.click_count = click_count
 
     def __repr__(self):
         return '<User %r>' % self.link
