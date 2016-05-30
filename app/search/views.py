@@ -3,11 +3,13 @@ from . import search
 #from .. import main
 from .. import db
 from app import app
-from flask_login import current_user, current_app
+
+from flask_login import current_user, current_app, session
 from ..models import Item, User
 from flask.ext.paginate import Pagination
 from .forms import searchForm
 import click
+from sqlalchemy.sql import func
 
 
 @search.before_request
@@ -35,7 +37,7 @@ def search():
 
 
     links = Item.query.filter(Item.title.like('%' +search_term + '%')).paginate(page, 10, True)
-
+    #links = Item.query(func.mid(Item.title, 1, 3).like('%' +search_term + '%')).paginate(page, 10, True)
 
     total = Item.query.count()
     pagination = get_pagination(page=page,

@@ -92,10 +92,7 @@ def security(username):
 @auth.route("/logout", methods=["GET"])
 def logout():
     try:
-        user = current_user
-        user.authenticated = False
-        db.session.add(user)
-        db.session.commit()
+
         logout_user()
 
 

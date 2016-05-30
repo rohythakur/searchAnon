@@ -1,26 +1,40 @@
-{% extends "base.html" %}
+{% extends "/mainholders/base.html" %}
 {% from "/search/_formhelpers.html" import render_field %}
 
 {% block content %}
     <div id="searchbox">
-            <div id="bannerlogo">
+
+
+<!-- lgo-->
+          <div id="bannerlogo">
                 <img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="100px" height="100px">
-            </div>
+          </div>
+
+<!-- seartchinput-->
 
           <div id="searchinput">
-              <form method=post action="/search/search">
-                {{ render_field(form.searchString, placeholder="Search Onions", autocomplete="off") }}
+
+
+              <div class="col-xs-10">
+              <form method=post action="/search/search" class="form form-horizontal">
+                 {{ render_field(form.searchString, autocomplete="off",class="form-control input-lg") }}
 
 
               </div>
+
+          </div>
+
+
+<!-- Buttons-->
           <div id="searchbuttons">
                 <input class="btn btn-danger" type="submit" value=Search>
                <button type="button" class="btn btn-default">Whats Popular</button>
-                        </div>
+          </div>
+              </form>
     </div>
 
 
-        </form>
+
 
 
 {% endblock %}

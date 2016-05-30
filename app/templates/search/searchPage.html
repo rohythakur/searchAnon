@@ -1,20 +1,50 @@
+{% from "/search/_formhelpers.html" import render_field %}
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/searchresult.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
+
+
 {% block content %}
 
+
+<!-- Banner-->
+
+
 <div id="topBanner">
+ <a href="{{ url_for('index') }}">
    <img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="50px" height="50px">
 
+ <a/>
+
+<!-- SearchBox-->
 
 
-    <div id="topsearchbox">
-       <div class="col-lg-6">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for...">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
-          </span>
-    </div> </div> </div>
+
+    <div id="topsearchBox">
+
+
+             <div class="col-xs-8">
+                    <form method=post action="/search/search" >
+
+                    {{ render_field(form.searchString, autocomplete="off", type="text", class="form-control", placeholder="Search Onions") }}
+             </div>
+        <div id="searchButtonBox">
+                    <button type="submit" class="btn btn-primary">Search</button>
+
+            </div>
+                     </form>
+
+
+   </div>
+
+
+
+<!-- Authentication-->
+
+
+
+
             <div id="topName">
               {% if current_user.is_authenticated %}
                         <a href="{{ url_for('main.user', username=current_user.username) }}">{{ current_user.username }}</a>
@@ -30,12 +60,13 @@
            </div>
 
 
-</div>
 
+
+<!-- Left Margin-->
 
     <div id="marginLeft"></div>
 
-
+<!-- Search Middle -->
 
     <div id="resultContainer"> <div id="topResultspacer"></div>
 
@@ -44,6 +75,9 @@
 
     </div>
 
+
+
+<!-- Right Margin -->
 
    <div id="sideContainer"></div>
 
