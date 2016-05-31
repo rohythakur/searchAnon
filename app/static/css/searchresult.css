@@ -113,6 +113,7 @@
     margin: .5em;
     margin-left: 0;
     font-size: 12px;
+    align-content: center;
 }
 .pagination-page-info b {
     color: black;
@@ -120,4 +121,5 @@
     padding-left: 2px;
     padding: .1em .25em;
     font-size: 150%;
+    align-content: center;
 }

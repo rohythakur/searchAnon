@@ -31,18 +31,23 @@ def search():
 
     page = int(request.args.get('page', 1))
     PER_PAGE = 10
-    inner_window = 10
-    outer_window = 10
+    inner_window = 4
+    outer_window = 3
     offset = page * 1
 
 
-    links = Item.query.filter(Item.title.like('%' +search_term + '%')).paginate(page, 10, True)
+
+    links = Item.query.filter(Item.title.like('%' +search_term+ '%')).paginate(page, 10, True)
+
+
     #links = Item.query(func.mid(Item.title, 1, 3).like('%' +search_term + '%')).paginate(page, 10, True)
 
-    total = Item.query.count()
+    total = Item.query.filter(Item.title.like('%' +search_term + '%')).count()
     pagination = get_pagination(page=page,
                                  per_page=PER_PAGE,
                                 offset=offset,
+
+
 
                                 inner_window=inner_window,
                                 outer_window = outer_window,
@@ -52,7 +57,7 @@ def search():
                                 total = total,        #total number of results
                                 format_total=True,   #format total. example 1,024
                                 format_number=True,  #turn on format flag
-                                record_name='links',
+                                record_name='links'
 
                             )
 

@@ -4,9 +4,9 @@
 
 <div id="resultbox">
 
-         <div id="linkTitle"><h4>{{ link.title }}</h4> </div>
+         <div id="linkTitle"><h4><a href="{{ link.link }}">{{ link.title }}</a></h4> </div>
          <div id="lastUpdated">Checked: 14 hours ago </div>
-         <div id="linkLink">{{ link.link | safe }}</div>
+         <div id="linkLink">{{ link.link }}</div>
          <div id="linkDescription">{{ link.description | safe }}</div>
 
 
