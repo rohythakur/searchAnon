@@ -5,17 +5,15 @@
 
 
 
-{% block content %}
+
 
 
 <!-- Banner-->
 
 
 <div id="topBanner">
- <a href="{{ url_for('index') }}">
-   <img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="50px" height="50px">
+ <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="50px" height="50px"> <a/>
 
- <a/>
 
 <!-- SearchBox-->
 
@@ -60,7 +58,8 @@
            </div>
 
 
-
+<!-- Right bar -->
+   <div id="sideContainer"></div>
 
 <!-- Left Margin-->
 
@@ -68,18 +67,33 @@
 
 <!-- Search Middle -->
 
-    <div id="resultContainer"> <div id="topResultspacer"></div>
+    <div id="resultContainer">
+        <div id="topResultspacer"></div>
 
 
         {% include 'search/_searchresult.html' %}
 
     </div>
 
+<div id="paginationContainer">
 
 
-<!-- Right Margin -->
 
-   <div id="sideContainer"></div>
+    <div id="paginationContainerMiddle">
+        <div id="paginationContainertotal">
+                   {{ pagination.info  }}
+        </div>
+        <div id="paginationContainernumberlist">
+                    {{ pagination.links  }}
+         </div>
 
 
-{% endblock %}
+
+</div></div>
+
+
+<!-- BOTTOM -->
+
+
+
+<div id="bottomsearchMain"></div>

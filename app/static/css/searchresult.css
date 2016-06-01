@@ -59,28 +59,28 @@
      top: 70px;
 
      margin-left: -10px;
-     background-color: white;
+     background-color: green;
 }
 
 #resultContainer {
      position: absolute;
      width: 600px;
-     height: 1800px;
+     height: 1600px;
      top: 70px;
 
      margin-left: 130px;
-     background-color: white;
+      background-color: white;
 }
+
 
 
 #sideContainer {
      position: absolute;
      width: 315px;
      height: 1800px;
-     top: 70px;
-
-     margin-left: 735px;
-     background-color: white;
+    top: 70px;
+     margin-left: 750px;
+     background-color: red;
 }
 
 #spaceResults {
@@ -90,7 +90,7 @@
 
 
      margin-left: 10px;
-     background-color: white;
+     background-color: green;
 }
 
 #topResultspacer {
@@ -100,8 +100,9 @@
 
      top: 0px;
      margin-left: 0px;
-     background-color: white;
+     background-color: green;
 }
+
 
 
 
@@ -113,7 +114,7 @@
     margin: .5em;
     margin-left: 0;
     font-size: 12px;
-    align-content: center;
+
 }
 .pagination-page-info b {
     color: black;
@@ -121,5 +122,54 @@
     padding-left: 2px;
     padding: .1em .25em;
     font-size: 150%;
-    align-content: center;
+
+}
+
+
+#paginationContainer {
+     position: absolute;
+
+    border-top-width: thin;
+    border-top-style: solid;
+    border-top-color: lightgray;
+     width: 600px;
+     height: 200px;
+     top: 1650px;
+
+     margin-left: 150px;
+   background-color: yellow;
+}
+
+
+
+
+#paginationContainertotal {
+     position: absolute;
+     width: 300px;
+     height: 50px;
+
+
+margin-left: 100px;
+   background-color: white;
+}
+
+#paginationContainernumberlist{
+     position: absolute;
+     width: 500px;
+     height: 100px;
+     margin-top: 50px;
+
+margin-left: 50px;
+    background-color: white;
+}
+
+
+/* bottom*/
+#bottomsearchMain{
+      position: relative;
+     width: 100%;
+     height: 100px;
+        top:1800px;
+     background-color: lightgray;
+
 }
