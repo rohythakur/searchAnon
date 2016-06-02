@@ -6,7 +6,7 @@
        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 
       <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
-       <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+
   </head>
 
   <body>
@@ -14,26 +14,32 @@
 <div id = "mainlayer">
       <div id="topbar">
           <div id="loginregister">
-              {% if current_user %}
-                  <a href="{{ url_for('main.user', username=current_user.username) }}">{{ current_user.username }}</a>
 
-                  <a href="{{ url_for('auth.logout') }}">Log Out</a>
+
+              {% if current_user.is_authenticated %}
+                  <div id ="usernameorlogin"><a href="{{ url_for('main.user', username=current_user.username) }}">{{ current_user.username }}</a></div>
+
+                  <div id ="logoutorregister">       <a href="{{ url_for('auth.logout') }}">Log Out</a></div>
+
+
 
               {% else %}
-                  <a href="{{ url_for('auth.login') }}">Login</a>
-                  <a href="{{ url_for('auth.register') }}">Register</a>
+                  <div id ="usernameorlogin"><a href="{{ url_for('auth.login') }}">Login</a></div>
+                  <div id ="logoutorregister"><a href="{{ url_for('auth.register') }}">Register</a></div>
 
-                     {% endif %}
+              {% endif %}
+
+                 <a href="{{ url_for('main.email') }}">
+                 <div id="emailholdericon"><img src="{{ url_for('static', filename='/images/emailogo.png') }}" width="25px" height="25px"></div>
+
+                 </a>
 
 
 
 
+           </div>
 
-
-
-          </div>
-
-    </div>
+      </div>
 
       {% block content %}
 

@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, g, flash, request
-from flask.ext.login import logout_user, current_user
+from flask_login import logout_user, current_user
 from . import main
 from .. import db
 from app import login_manager, app
@@ -8,8 +8,9 @@ from forms import addlinkForm
 from ..search.forms import searchForm
 
 
-@app.before_request
+@main.before_request
 def before_request():
+    #current_user.ping()
     g.user = current_user
 
 
@@ -58,7 +59,16 @@ def viewlink():
 
 @main.route('/<username>', methods=['GET', 'POST'])
 def user(username):
-    user = User.query.filter_by(username=username).first()
+    user = User.query.filter_by(username=username).first_or_404()
+    ##TODO Add account details/password change
+
+
+    return render_template('auth/viewperson.html', user=user)
+
+
+
+def mail():
+    email = User.query.filter_by(username=username).first_or_404()
     ##TODO Add account details/password change
 
 

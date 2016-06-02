@@ -50,7 +50,6 @@
 
 
 
-/* Middle*/
 
 #marginLeft {
      position: absolute;
@@ -59,8 +58,14 @@
      top: 70px;
 
      margin-left: -10px;
-     background-color: green;
+   background-color: white;
+
 }
+
+
+
+
+/* Middle*/
 
 #resultContainer {
      position: absolute;
@@ -70,7 +75,10 @@
 
      margin-left: 130px;
       background-color: white;
+
 }
+
+
 
 
 
@@ -80,7 +88,7 @@
      height: 1800px;
     top: 70px;
      margin-left: 750px;
-     background-color: red;
+   background-color: white;
 }
 
 #spaceResults {
@@ -90,7 +98,7 @@
 
 
      margin-left: 10px;
-     background-color: green;
+   background-color: white;
 }
 
 #topResultspacer {
@@ -100,7 +108,7 @@
 
      top: 0px;
      margin-left: 0px;
-     background-color: green;
+   background-color: white;
 }
 
 
@@ -137,7 +145,7 @@
      top: 1650px;
 
      margin-left: 150px;
-   background-color: yellow;
+    background-color: white;
 }
 
 

@@ -1,7 +1,7 @@
 __author__ = 'ed'
 from functools import wraps
 from flask import abort, session, flash, redirect, url_for, request, g
-from flask.ext.login import current_user
+from flask_login import current_user
 
 
 

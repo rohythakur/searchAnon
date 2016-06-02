@@ -81,7 +81,7 @@
 
     <div id="paginationContainerMiddle">
         <div id="paginationContainertotal">
-                   {{ pagination.info  }}
+                   {{ pagination.info  | safe}}
         </div>
         <div id="paginationContainernumberlist">
                     {{ pagination.links  }}

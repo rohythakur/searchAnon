@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, flash, request, session, g
-from flask.ext.login import current_user, logout_user, flash, login_user
+from flask_login import current_user, logout_user, flash, login_user
 from . import auth
 from .. import db
 from ..models import User
@@ -8,11 +8,11 @@ from .forms import ChangePasswordForm, RegistrationForm, LoginForm
 from sqlalchemy.orm.exc import UnmappedInstanceError
 
 
-
-
 @auth.before_request
 def before_request():
+    #current_user.ping()
     g.user = current_user
+
 
 
 
@@ -25,7 +25,7 @@ def login():
 
             user = User.query.filter_by(username=form.username.data).first()
             if user is not None and user.verify_password(form.password_hash.data):
-
+                print "success"
                 login_user(user)
                 current_user.is_authenticated = True
                 print (user)
@@ -95,7 +95,7 @@ def logout():
 
         logout_user()
 
-
+        print "logged out"
     except UnmappedInstanceError:
        pass
     return redirect(url_for('index'))
