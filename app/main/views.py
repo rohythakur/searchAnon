@@ -14,6 +14,30 @@ def before_request():
     g.user = current_user
 
 
+
+
+
+
+
+
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
+def index():
+    form = searchForm(request.form)
+    search_term = form.searchString.data
+
+    if request.method == 'POST' and form.validate():
+
+        print "hello"
+        return redirect(url_for('search.searchresults', search_term=search_term))
+    return render_template('index.html', form=form)
+
+
+
+
+
+
+
 @main.route('/contact', methods=['GET', 'POST'])
 
 def contact():
@@ -26,16 +50,6 @@ def contact():
 def about():
     return render_template('about.html')
 
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/index', methods=['GET', 'POST'])
-def index():
-    form = searchForm(request.form)
-
-    if request.method == 'POST' and form.validate():
-        search_term = form.searchString.data
-
-        return redirect(url_for('search.searchresults'))
-    return render_template('index.html', form=form)
 
 
 

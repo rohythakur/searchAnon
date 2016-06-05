@@ -55,7 +55,7 @@ def searchresults(search_term):
 
                                 )
     return render_template('search/searchPage.html', links = links, pagination = pagination,
-                           page = page, per_page = PER_PAGE, form=form)
+                           page = page, per_page = PER_PAGE, form=form, search_term=search_term)
 
 def get_css_framework():
     return 'bootstrap3'
