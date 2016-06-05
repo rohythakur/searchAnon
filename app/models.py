@@ -35,15 +35,16 @@ class Item(db.Model):
 
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'
+    __tablename__  = 'users'
     id             = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username       = db.Column(db.String(64), unique=True, index=True)
+    username       = db.Column(db.String(64), unique=True, index=True, )
     password_hash  = db.Column(db.String(128))
     welcomeMessage = db.Column(db.Text())
-    aboutme       = db.Column(db.Text())
-    pgp           = db.Column(db.Text())
+    aboutme        = db.Column(db.Text())
+    pgp            = db.Column(db.Text())
     pin            = db.Column(db.String(64))
-    member_since = db.Column(db.DateTime(), default=datetime.utcnow)
+    member_since   = db.Column(db.DateTime(), default=datetime.utcnow)
+    email          = db.Column(db.String(128))
 
 
 

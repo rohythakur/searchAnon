@@ -18,7 +18,7 @@ def before_request():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
+    form = LoginForm(request.form)
     if request.method == 'POST':
         print 'Post'
         if form.validate_on_submit():
@@ -43,8 +43,11 @@ def login():
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     print "step 1 register"
-    form = RegistrationForm()
-    if request.method == 'POST':
+    form = RegistrationForm(request.form)
+
+
+
+    if request.method == 'POST' and form.validate():
         print "step 2 register"
         user = User(username=form.username.data,
                     password=form.password.data,
@@ -68,7 +71,7 @@ def register():
 
 @auth.route('/security/<username>', methods=['GET', 'POST'])
 def security(username):
-    form = ChangePasswordForm()
+    form = ChangePasswordForm(request.form)
     user = User.query.filter_by(username=username).first()
     print ("here")
     if form.validate_on_submit():

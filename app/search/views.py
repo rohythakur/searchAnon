@@ -8,16 +8,15 @@ from ..models import Item
 from flask_paginate import Pagination
 from .forms import searchForm
 
-from sqlalchemy.sql import func
+#from sqlalchemy.sql import func
 
 
 
-@search.route('/search', methods=['GET', 'POST'])
-def search():
-    form = searchForm()
-    search_term = form.searchString.data
 
-    print search_term
+
+@search.route('/<search_term>', methods=['GET', 'POST'])
+def searchresults(search_term):
+    form = searchForm(request.form)
     search = False
     q = request.args.get('q')
     if q:
@@ -33,37 +32,30 @@ def search():
     outer_window = 3
     offset = page * 1
 
+    # doesnt work
+    links = Item.query.filter(Item.description.like('%' + search_term + '%')).paginate(page, 10, True)
 
-    #doesnt work
-    links = Item.query.filter(Item.title.like('%' + search_term + '%')).paginate(page, 10, True)
+    # links = db.query.filter(func.mid(Item.description, 1, 3).all()).paginate(page, 10, True)
 
-
-
-    #links = db.query.filter(func.mid(Item.description, 1, 3).all()).paginate(page, 10, True)
-
-    total = Item.query.filter(Item.title.like('%' +search_term + '%')).count()
+    total = Item.query.filter(Item.title.like('%' + search_term + '%')).count()
     pagination = get_pagination(page=page,
                                 links=links,
-                                 per_page=PER_PAGE,
+                                per_page=PER_PAGE,
                                 offset=offset,
 
                                 search_term=search_term,
                                 inner_window=inner_window,
-                                outer_window = outer_window,
+                                outer_window=outer_window,
                                 search=search,
 
-
-                                total = total,        #total number of results
-                                format_total=True,   #format total. example 1,024
-                                format_number=True,  #turn on format flag
+                                total=total,  # total number of results
+                                format_total=True,  # format total. example 1,024
+                                format_number=True,  # turn on format flag
                                 record_name='links'
 
-                            )
-
-    return render_template('search/searchPage.html', form=form, links=links, pagination=pagination, page=page, per_page = PER_PAGE)
-
-
-
+                                )
+    return render_template('search/searchPage.html', links = links, pagination = pagination,
+                           page = page, per_page = PER_PAGE, form=form)
 
 def get_css_framework():
     return 'bootstrap3'

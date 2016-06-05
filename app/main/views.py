@@ -29,7 +29,12 @@ def about():
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    form = searchForm()
+    form = searchForm(request.form)
+
+    if request.method == 'POST' and form.validate():
+        search_term = form.searchString.data
+
+        return redirect(url_for('search.searchresults'))
     return render_template('index.html', form=form)
 
 
@@ -64,14 +69,4 @@ def user(username):
 
 
     return render_template('auth/viewperson.html', user=user)
-
-
-
-def mail():
-    email = User.query.filter_by(username=username).first_or_404()
-    ##TODO Add account details/password change
-
-
-    return render_template('auth/viewperson.html', user=user)
-
 
