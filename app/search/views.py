@@ -1,6 +1,5 @@
 from flask import render_template, redirect, url_for, g, flash, request, current_app
 from . import search
-#from .. import main
 
 
 from flask_login import current_app, session
@@ -13,28 +12,35 @@ from .forms import searchForm
 
 
 
+@search.route('/<search_term>/')
 
-@search.route('/<search_term>', methods=['GET', 'POST'])
 def searchresults(search_term):
     form = searchForm(request.form)
     search = False
-    q = request.args.get('q')
+    q = request.args.get(search_term)
     if q:
         search = True
 
     try:
-        page = int(request.args.get('page', 1))
+        page = request.args.get('page', type=int, default=1)
     except ValueError:
         page = 1
-
+    search_term = str(search_term)
+    print search_term
     PER_PAGE = 10
     inner_window = 4
     outer_window = 3
     offset = page * 1
 
-    # doesnt work
-    links = Item.query.filter(Item.description.like('%' + search_term + '%')).paginate(page, 10, True)
 
+    #works ...
+    #links = Item.query.filter(Item.title.like('%a%')).paginate(page, 10, True)
+
+    # doesnt work
+    links = Item.query.filter(Item.description.like('%' +  search_term + '%')).paginate(page, 10, True)
+
+
+    #prototype
     # links = db.query.filter(func.mid(Item.description, 1, 3).all()).paginate(page, 10, True)
 
     total = Item.query.filter(Item.title.like('%' + search_term + '%')).count()
@@ -55,7 +61,13 @@ def searchresults(search_term):
 
                                 )
     return render_template('search/searchPage.html', links = links, pagination = pagination,
-                           page = page, per_page = PER_PAGE, form=form, search_term=search_term)
+                           page = page, per_page = PER_PAGE, form=form)
+
+
+
+
+
+
 
 def get_css_framework():
     return 'bootstrap3'
