@@ -37,7 +37,7 @@ def searchresults(search_term):
     #links = Item.query.filter(Item.title.like('%a%')).paginate(page, 10, True)
 
     # doesnt work
-    links = Item.query.filter(Item.description.like('%' +  search_term + '%')).paginate(page, 10, True)
+    links = Item.query.filter(Item.title.like('%' +  search_term + '%')).paginate(page, 10, True)
 
 
     #prototype
