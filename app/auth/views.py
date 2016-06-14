@@ -51,17 +51,18 @@ def register():
 
 
 
-    if request.method == 'POST' and form.validate_username(form):
+    if request.method == 'POST':
         print "step 2 register"
         user = User(username=form.username.data,
                     password=form.password.data,
-                    welcomeMessage=form.welcomeMessage.data,
+                    welcomeMessage='',
                     aboutme = '',
                     pgp = '',
-                    pin = form.pin.data,
+                    pin = '',
                     member_since = timestamp,
                     email = ''
                     )
+
         db.session.add(user)
         print "step 3 register"
         db.session.commit()

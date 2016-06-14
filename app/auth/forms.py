@@ -20,6 +20,9 @@ class RegistrationForm(Form):
 
     pin = (StringField('Enter your personal pin', validators=[Length(4, 4)]))
     submit = SubmitField('Register')
+    recaptcha = RecaptchaField('Are you human?',
+        description="Type both words into the text box to prove that you are a human and not a computer program")
+
 
 
     def validate_username(self, field):
@@ -36,4 +39,43 @@ class RegistrationForm(Form):
           return True
 
 
-#test
+
+
+class LoginForm(Form):
+
+    username = StringField('', validators=[
+        DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+                                          'Usernames must have only letters, '
+                                          'numbers, dots or underscores')], description="test")
+    password_hash = PasswordField('', validators=[ DataRequired()])
+
+    submit = SubmitField('Login')
+
+
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+
+    def validate(self):
+        if not Form.validate(self):
+            return False
+
+        user = User.query.filter_by(username=self.username.data.lower()).first()
+        if user and user.verify_password(self.password_hash.data):
+            return True
+
+        else:
+            self.username.errors.append("Invalid username or password")
+            return False
+
+
+
+class ChangePasswordForm(Form):
+    old_password = PasswordField('Old password', validators=[DataRequired()])
+    password = PasswordField('New password', validators=[
+        DataRequired(), EqualTo('password2', message='Passwords must match')])
+    password2 = PasswordField('Confirm new password', validators=[DataRequired()])
+    welcomeM = StringField('Welcome Message', validators=[Length(1, 64)])
+    submit = SubmitField('Update Password')
+
+
+    ##TODO WORK ON CHANGE PASSWORD FORM

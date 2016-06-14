@@ -46,17 +46,20 @@ class User(UserMixin, db.Model):
     member_since   = db.Column(db.DateTime(), default=datetime.utcnow)
     email          = db.Column(db.String(128))
 
-    ##TODO FINISH THIS!!
-    def __init__(self, username, password_hash, welcomeMessage, aboutme, last_updated, click_count):
-        self.title = title
-        self.link = link
-        self.description = description
+
+    def __init__(self, username, password, welcomeMessage, aboutme, pgp, pin, member_since, email):
+        self.username = username
+        self.password = password
+        self.welcomeMessage = welcomeMessage
+        self.aboutme = aboutme
+        self.pgp = pgp
+        self.pin = pin
         self.member_since = member_since
-        self.last_updated = last_updated
-        self.click_count = click_count
+        self.email = email
 
     def __repr__(self):
-        return '<User %r>' % self.link
+        return '<User %r>' % self.User
+
 
     @property
     def password(self):
@@ -68,8 +71,6 @@ class User(UserMixin, db.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
-
-
 
     def reset_password(self, token, new_password):
         s = Serializer(current_app.config['SECRET_KEY'])
