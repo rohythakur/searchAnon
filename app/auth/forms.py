@@ -15,13 +15,14 @@ class RegistrationForm(Form):
     password = PasswordField('Password', validators=[
         DataRequired(), EqualTo('password2', message='Passwords must match.')])
     password2 = PasswordField('Confirm password', validators=[DataRequired()])
-    recaptcha = RecaptchaField('Are you human?',
-        description="Type both words into the text box to prove that you are a human and not a computer program")
 
     welcomeMessage = StringField('Welcome Message', validators=[Length(1, 64)])
 
     pin = (StringField('Enter your personal pin', validators=[Length(4, 4)]))
     submit = SubmitField('Register')
+    recaptcha = RecaptchaField('Are you human?',
+        description="Type both words into the text box to prove that you are a human and not a computer program")
+
 
 
     def validate_username(self, field):

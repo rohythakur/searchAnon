@@ -6,17 +6,14 @@ from app import login_manager, app
 from ..models import Item, User
 from forms import addlinkForm
 from ..search.forms import searchForm
+from datetime import datetime
 
+timestamp = datetime.today()
 
 @main.before_request
 def before_request():
     #current_user.ping()
     g.user = current_user
-
-
-
-
-
 
 
 
@@ -35,11 +32,7 @@ def index():
 
 
 
-
-
-
 @main.route('/contact', methods=['GET', 'POST'])
-
 def contact():
     return render_template('contact.html')
 
@@ -52,21 +45,34 @@ def about():
 
 
 
-
-
 @main.route('/addurl', methods=['GET', 'POST'])
 def addurl():
     form = addlinkForm()
     items = Item.query.all()
+
     print ("Create Item Page")
     if request.method == 'POST':
         items = Item(
-                    link="HTTP://" + form.link.data.upper() + ".ONION/"
+                    link="HTTP://" + form.link.data.upper() + ".ONION/",
+                    title = '',
+                    description = '',
+                    member_since=timestamp,
+                    click_count= '',
+                    last_updated=timestamp
                     )
-        db.session.add(items)
-        db.session.commit()
-        print ("Link Created")
-        return redirect(url_for('main.viewlink'))
+        try:
+            db.session.add(items)
+            db.session.commit()
+            print ("Link Created")
+            flash('Website sucessfully added')
+            return redirect(url_for('main.user'))
+        except Exception as e:
+            print str(e)
+            flash('This website has already been added! ')
+            db.session.rollback()
+            db.session.flush()
+
+
     return render_template('add.html', form=form)
 
 

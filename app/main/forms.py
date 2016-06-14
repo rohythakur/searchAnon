@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, Length
 
 class addlinkForm(Form):
 
-    link = StringField('URL Link', validators=[Length(0, 64)])
+    link = StringField('URL Link', validators=[Length(16, 16)])
     submit = SubmitField('Update')
 
 

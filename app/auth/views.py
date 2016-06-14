@@ -7,6 +7,9 @@ from ..models import User
 from .forms import ChangePasswordForm, RegistrationForm, LoginForm
 from sqlalchemy.orm.exc import UnmappedInstanceError
 
+from datetime import datetime
+
+timestamp = datetime.today()
 
 @auth.before_request
 def before_request():
@@ -42,18 +45,23 @@ def login():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
+    ##TODO register doesnt work due to models...
     print "step 1 register"
     form = RegistrationForm(request.form)
 
 
 
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST' and form.validate_username(form):
         print "step 2 register"
         user = User(username=form.username.data,
                     password=form.password.data,
                     welcomeMessage=form.welcomeMessage.data,
-
-                    pin=form.pin.data)
+                    aboutme = '',
+                    pgp = '',
+                    pin = form.pin.data,
+                    member_since = timestamp,
+                    email = ''
+                    )
         db.session.add(user)
         print "step 3 register"
         db.session.commit()

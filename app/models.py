@@ -46,8 +46,17 @@ class User(UserMixin, db.Model):
     member_since   = db.Column(db.DateTime(), default=datetime.utcnow)
     email          = db.Column(db.String(128))
 
+    ##TODO FINISH THIS!!
+    def __init__(self, username, password_hash, welcomeMessage, aboutme, last_updated, click_count):
+        self.title = title
+        self.link = link
+        self.description = description
+        self.member_since = member_since
+        self.last_updated = last_updated
+        self.click_count = click_count
 
-
+    def __repr__(self):
+        return '<User %r>' % self.link
 
     @property
     def password(self):

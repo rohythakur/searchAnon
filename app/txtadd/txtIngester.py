@@ -22,6 +22,7 @@ def add_bot():
                                         links = Item(link=line,
                                                      title='',
                                                      description='',
+                                                     click_count='',
                                                      member_since=timestamp)
                                         db.session.add(links)
                                         db.session.commit()

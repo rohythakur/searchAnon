@@ -7,12 +7,12 @@ from ..models import Item
 from flask_paginate import Pagination
 from .forms import searchForm
 
-#from sqlalchemy.sql import func
+from sqlalchemy.sql import func
 
 
 
 
-@search.route('/<search_term>/')
+@search.route('/search=?result/<search_term>')
 
 def searchresults(search_term):
     form = searchForm(request.form)
@@ -33,8 +33,7 @@ def searchresults(search_term):
     offset = page * 1
 
 
-    #works ...
-    #links = Item.query.filter(Item.title.like('%a%')).paginate(page, 10, True)
+
 
     # doesnt work
     links = Item.query.filter(Item.title.like('%' +  search_term + '%')).paginate(page, 10, True)
