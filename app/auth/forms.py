@@ -1,10 +1,10 @@
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, SubmitField, RadioField
+from wtforms import StringField, PasswordField, SubmitField, RadioField, validators
 from wtforms.validators import DataRequired, Length,  Regexp, EqualTo
-from wtforms import ValidationError, validators
+from wtforms import ValidationError
 from ..models import User
 from flask_wtf import RecaptchaField
-
+from flask import flash
 
 class RegistrationForm(Form):
 
@@ -16,27 +16,31 @@ class RegistrationForm(Form):
         DataRequired(), EqualTo('password2', message='Passwords must match.')])
     password2 = PasswordField('Confirm password', validators=[DataRequired()])
 
-    welcomeMessage = StringField('Welcome Message', validators=[Length(1, 64)])
+    welcomeMessage = StringField('Welcome Message', [validators.Length(min=10, max=64)])
 
-    pin = (StringField('Enter your personal pin', validators=[Length(4, 4)]))
+    pin = (StringField('Enter your personal pin', [validators.Length(min=4, max=4)]))
     submit = SubmitField('Register')
     recaptcha = RecaptchaField('Are you human?',
         description="Type both words into the text box to prove that you are a human and not a computer program")
 
 
 
-    def validate_username(self, field):
-        if User.query.filter_by(username=field.data).first():
-            raise ValidationError('Username already in use.')
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
 
 
-        username = User.query.filter(User.username == self.username.data.lower()).first()
-        if username:
+    def validate_username(self):
+        if User.query.filter_by(username=self.username.data).first():
+            #raise ValidationError('Username already in use.')
 
-            self.username.errors.append("That username is already taken.")
-            return False
-        else:
-          return True
+
+            username = User.query.filter(User.username == self.username.data.lower()).first()
+            if username:
+                #self.username.errors.append("Invalid username or password")
+                flash('username taken')
+                return False
+            else:
+              return True
 
 
 
@@ -64,7 +68,8 @@ class LoginForm(Form):
             return True
 
         else:
-            self.username.errors.append("Invalid username or password")
+            flash('invalid username or password')
+            #self.username.errors.append("Invalid username or password")
             return False
 
 

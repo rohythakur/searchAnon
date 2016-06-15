@@ -21,6 +21,7 @@ def before_request():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    ##TODO add recaptcva
     form = LoginForm(request.form)
     if request.method == 'POST':
         print 'Post'
@@ -45,13 +46,14 @@ def login():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
-    ##TODO register doesnt work due to models...
+    ##TODO add recaptcva
+
     print "step 1 register"
     form = RegistrationForm(request.form)
 
 
 
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate_username():
         print "step 2 register"
         user = User(username=form.username.data,
                     password=form.password.data,
@@ -68,7 +70,7 @@ def register():
         db.session.commit()
 
 
-        flash('Logged in Successfully')
+        flash('Registered Successfully')
         return redirect(url_for('auth.login'))
     return render_template('/auth/register.html', form=form)
 
@@ -95,10 +97,6 @@ def security(username):
 
             return redirect(url_for('main.index'))
     return render_template('/auth/security.html', user=user, form=form)
-
-
-
-
 
 
 @auth.route("/logout", methods=["GET"])

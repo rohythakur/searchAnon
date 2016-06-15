@@ -9,7 +9,7 @@ from datetime import datetime
 
 
 
-##Todo Upgrade Item for better links
+##Todo Upgrade Item for better links ie last checked
 
 class Item(db.Model):
     __tablename__ = 'items'
@@ -58,7 +58,7 @@ class User(UserMixin, db.Model):
         self.email = email
 
     def __repr__(self):
-        return '<User %r>' % self.User
+        return '<User %r>' % self.username
 
 
     @property

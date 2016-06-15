@@ -47,11 +47,12 @@ def about():
 
 @main.route('/addurl', methods=['GET', 'POST'])
 def addurl():
-    form = addlinkForm()
-    items = Item.query.all()
+
+    form = addlinkForm(request.form)
+
 
     print ("Create Item Page")
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate():
         items = Item(
                     link="HTTP://" + form.link.data.upper() + ".ONION/",
                     title = '',
@@ -65,10 +66,10 @@ def addurl():
             db.session.commit()
             print ("Link Created")
             flash('Website sucessfully added')
-            return redirect(url_for('main.user'))
+            return redirect(url_for('user'))
         except Exception as e:
             print str(e)
-            flash('This website has already been added! ')
+            flash('This website is already present on Zoom! ')
             db.session.rollback()
             db.session.flush()
 
