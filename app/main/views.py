@@ -50,7 +50,6 @@ def addurl():
 
     form = addlinkForm(request.form)
 
-
     print ("Create Item Page")
     if request.method == 'POST' and form.validate():
         items = Item(
@@ -86,7 +85,7 @@ def viewlink():
 @main.route('/<username>', methods=['GET', 'POST'])
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    ##TODO Add account details/password change
+
 
 
     return render_template('auth/viewperson.html', user=user)

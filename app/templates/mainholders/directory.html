@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Disconnect</title>
+
+       <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
+              <link rel="stylesheet" href="{{ url_for('static', filename='css/directory.css') }}">
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+  </head>
+
+  <body>
+
+  <div id = 'topbar'>
+         <a href="{{ url_for('index') }}">
+        <img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="100px" height="100px">
+        </a>
+
+  </div>
+
+    <div id="pageLabelmain">{{ current_user.username }}</div>
+
+    <div id="innerpageLabel">Security</div>
+
+
+    <div id="directorybrowser">
+
+
+<ul style="list-style-type:none">
+  <li>Account Security</li>
+
+    <ul>
+
+    <dt><a href="{{ url_for('auth.security', username=current_user.username) }}">Change password</a></dt>
+        </ul>
+     <li>My .onions</li>
+  <li>Help and FeedBack</li>
+</ul>
+
+    </div>
+
+
+
+
+
+
+
+  <div id="contentholder">
+
+
+
+
+
+
+
+
+
+
+
+
+      {% block content %}
+
+
+
+      {% endblock %}
+
+
+  </div>
+
+  </body>
+</html>
