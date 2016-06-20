@@ -15,22 +15,26 @@
           <div id="searchinput">
 
 
-              <div class="col-xs-10">
-              <form action="{{ url_for('index', search_term=search_term) }}" method="post">
-                  {{ render_field(form.searchString, autocomplete="off",class="form-control input-lg") }}
+                  <div class="col-xs-10">
+                          <form action="{{ url_for('index', search_term=search_term) }}" method="post">
+                              {{ render_field(form.searchString, autocomplete="off",class="form-control input-lg") }}
 
 
-                      </div>
-                      </div>
-                                     <!-- Buttons-->
-                      <div id="searchbuttons">
-                            <input class="btn btn-danger" type="submit" value=Search>
-                           <button type="button" class="btn btn-default">Whats Popular</button>
-                      </div>
-              </form>
+
+                  </div>
+
+          </div>
+
+                        <!-- Buttons-->
+                                  <div id="searchbuttons">
+                                        <input class="btn btn-danger" type="submit" value=Search>
+                                       <button type="button" class="btn btn-default">Whats Popular</button>
+                  </div>
+                  </form>
+                  <div id="donationBox">Keep our servers running! 1F8bK43wrU4KMeq7D8R1NGkGPG5WEzaWHf          </div>
 
 
-                      </div>
+    </div>
 
 
 

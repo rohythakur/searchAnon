@@ -1,16 +1,17 @@
 __author__ = 'ed'
-WTF_CSRF_ENABLED = False
-SECRET_KEY = 'you-will-never-guess'
-import os
 
+import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
+WTF_CSRF_ENABLED = False
 
 
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
-POSTS_PER_PAGE = 4
+SECRET_KEY = 'secret'
+
+

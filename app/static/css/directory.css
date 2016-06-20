@@ -48,3 +48,13 @@
      margin-left: 250px;
       background-color: white;
 }
+
+#flashDirectory{
+      position: absolute;
+
+     height: 50px;
+     margin-top: 0px;
+     width:500px;
+     margin-left: 250px;
+      background-color: #ffffff;
+}

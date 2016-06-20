@@ -79,7 +79,8 @@ def addurl():
 @main.route('/linkcreated', methods=['GET', 'POST'])
 def viewlink():
 
-    return render_template('search/viewlink.html')
+
+    return render_template('search/myonions.html')
 
 
 @main.route('/<username>', methods=['GET', 'POST'])

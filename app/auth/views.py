@@ -82,6 +82,7 @@ def register():
 
 @auth.route('/security/<username>', methods=['GET', 'POST'])
 def security(username):
+    ##TODO add recaptcva
     form = ChangePasswordForm(request.form)
     user = User.query.filter_by(username=username).first()
     print ("here")
@@ -93,10 +94,17 @@ def security(username):
 
             db.session.add(user)
             db.session.commit()
-            print ("info updated")
+            flash('Password updated')
 
-            return redirect(url_for('main.index'))
+            return redirect(url_for('main.user', username=current_user.username))
     return render_template('/auth/security.html', user=user, form=form)
+
+
+@auth.route('/onions/<username>', methods=['GET', 'POST'])
+def myonions(username):
+    ##TODO add custom onions
+    user = User.query.filter_by(username=username).first()
+    return render_template('/auth/myonions.html', user=user)
 
 
 @auth.route("/logout", methods=["GET"])

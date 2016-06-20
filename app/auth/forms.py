@@ -20,8 +20,6 @@ class RegistrationForm(Form):
 
     pin = (StringField('Enter your personal pin', [validators.Length(min=4, max=4)]))
     submit = SubmitField('Register')
-    recaptcha = RecaptchaField('Are you human?',
-        description="Type both words into the text box to prove that you are a human and not a computer program")
 
 
 
@@ -31,12 +29,11 @@ class RegistrationForm(Form):
 
     def validate_username(self):
         if User.query.filter_by(username=self.username.data).first():
-            #raise ValidationError('Username already in use.')
 
 
             username = User.query.filter(User.username == self.username.data.lower()).first()
             if username:
-                #self.username.errors.append("Invalid username or password")
+
                 flash('username taken')
                 return False
             else:
@@ -83,4 +80,3 @@ class ChangePasswordForm(Form):
     submit = SubmitField('Update Password')
 
 
-    ##TODO WORK ON CHANGE PASSWORD FORM
