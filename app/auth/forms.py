@@ -1,17 +1,15 @@
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, SubmitField, RadioField, validators
+from wtforms import StringField, PasswordField, SubmitField, validators
 from wtforms.validators import DataRequired, Length,  Regexp, EqualTo
-from wtforms import ValidationError
 from ..models import User
-from flask_wtf import RecaptchaField
 from flask import flash
 
-class RegistrationForm(Form):
 
+class RegistrationForm(Form):
     username = StringField('Username', validators=[
         DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
-                                          'Usernames must have only letters, '
-                                          'numbers, dots or underscores')])
+                                              'Usernames must have only letters, '
+                                              'numbers, dots or underscores')])
     password = PasswordField('Password', validators=[
         DataRequired(), EqualTo('password2', message='Passwords must match.')])
     password2 = PasswordField('Confirm password', validators=[DataRequired()])
@@ -19,27 +17,51 @@ class RegistrationForm(Form):
     welcomeMessage = StringField('Welcome Message', [validators.Length(min=10, max=64)])
 
     pin = (StringField('Enter your personal pin', [validators.Length(min=4, max=4)]))
+    recaptcha = StringField('Please enter the letters from picture abvove ', validators=[
+        DataRequired(), Length(5, 5), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+                                          'Recaptchas must have only letters, '
+                                          'numbers, dots or underscores')])
+
+
     submit = SubmitField('Register')
-
-
 
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
 
-
     def validate_username(self):
-        if User.query.filter_by(username=self.username.data).first():
-
 
             username = User.query.filter(User.username == self.username.data.lower()).first()
+            print self.username.data.lower
             if username:
-
+                # self.username.errors.append("Invalid username or password")
                 flash('username taken')
                 return False
             else:
-              return True
 
 
+                return True
+
+    def validate_recaptcha(self, randompicture):
+
+
+
+        if randompicture == 'numbers1.jpg':
+            flash ('numbers1.jpg')
+            recaptchaanswer = 11111
+            if RegistrationForm.recaptcha == recaptchaanswer:
+                flash('recaptcha works!')
+                return True
+            else:
+                return False
+
+        if randompicture == 'numbers2.jpg':
+            flash ('numbers2.jpg')
+            recaptchaanswer = 22222
+            if RegistrationForm.recaptcha == recaptchaanswer:
+                flash('recaptcha works!')
+                return True
+            else:
+                return False
 
 
 class LoginForm(Form):

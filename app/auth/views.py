@@ -6,17 +6,16 @@ from ..models import User
 
 from .forms import ChangePasswordForm, RegistrationForm, LoginForm
 from sqlalchemy.orm.exc import UnmappedInstanceError
-
+import random
 from datetime import datetime
 
 timestamp = datetime.today()
+
 
 @auth.before_request
 def before_request():
     #current_user.ping()
     g.user = current_user
-
-
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -46,33 +45,59 @@ def login():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
-    ##TODO add recaptcva
+    ##TODO RECAPTCHA
+
 
     print "step 1 register"
     form = RegistrationForm(request.form)
+    randompicture = ['numbers1.jpg', 'numbers2.jpg']
+
+    picture = '/recaptcha/' + str((random.choice(randompicture)))
+    print picture
+
+    if str(picture) == '/recaptcha/numbers1.jpg':
+
+        flash('numbers1111.jpg')
+        recaptchaanswer = 11111
+        flash("works11111111")
+    if str(picture) == '/recaptcha/numbers2.jpg':
+        flash('numbers22222.jpg')
+        flash("works!!!222")
+        recaptchaanswer = 11111
+        if request.method == 'POST':
+            flash('post test')
+            print recaptchaanswer
+            print str(RegistrationForm.recaptcha)
+            if RegistrationForm.recaptcha == recaptchaanswer:
+                flash('recaptcha works!')
+
+                if form.validate_username():
+                    flash('username test')
 
 
 
-    if request.method == 'POST' and form.validate_username():
-        print "step 2 register"
-        user = User(username=form.username.data,
-                    password=form.password.data,
-                    welcomeMessage='',
-                    aboutme = '',
-                    pgp = '',
-                    pin = '',
-                    member_since = timestamp,
-                    email = ''
-                    )
+                    flash('recaptcha passed')
+                    flash('Registered Successfully')
+                    print "step 2 register"
+                    user = User(username=form.username.data,
+                                password=form.password.data,
+                                welcomeMessage='',
+                                aboutme = '',
+                                pgp = '',
+                                pin = '',
+                                member_since = timestamp,
+                                email = ''
+                                )
 
-        db.session.add(user)
-        print "step 3 register"
-        db.session.commit()
+                    db.session.add(user)
+                    print "step 3 register"
+                    db.session.commit()
 
 
-        flash('Registered Successfully')
-        return redirect(url_for('auth.login'))
-    return render_template('/auth/register.html', form=form)
+                    flash('Registered Successfully')
+                    return redirect(url_for('auth.login'))
+
+    return render_template('/auth/register.html', form=form, picture=picture)
 
 
 

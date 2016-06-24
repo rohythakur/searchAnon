@@ -33,7 +33,10 @@
     {{ render_field(form.username) }}
     {{ render_field(form.password) }}
     {{ render_field(form.password2) }}
+    {{ picture }}
 
+      <br> <img src='{{ picture }}'  width="100px" height="100px" >
+      {{ render_field(form.recaptcha) }}
     </dl>
 
 
