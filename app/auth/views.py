@@ -50,52 +50,44 @@ def register():
 
     print "step 1 register"
     form = RegistrationForm(request.form)
-    randompicture = ['numbers1.jpg', 'numbers2.jpg']
+    randompicture = ['image1.png','image2.png','image3.png','image4.png','image5.png','image6.png','image7.png',]
 
     picture = '/recaptcha/' + str((random.choice(randompicture)))
     print picture
 
-    if str(picture) == '/recaptcha/numbers1.jpg':
+    if str(picture) == '/recaptcha/image1.png':
 
-        flash('numbers1111.jpg')
-        recaptchaanswer = 11111
-        flash("works11111111")
-    if str(picture) == '/recaptcha/numbers2.jpg':
-        flash('numbers22222.jpg')
-        flash("works!!!222")
-        recaptchaanswer = 11111
-        if request.method == 'POST':
-            flash('post test')
-            print recaptchaanswer
-            print str(RegistrationForm.recaptcha)
-            if RegistrationForm.recaptcha == recaptchaanswer:
-                flash('recaptcha works!')
+        recaptchaanswer = 'CUXE'
 
-                if form.validate_username():
-                    flash('username test')
+    if str(picture) == '/recaptcha/image2.png':
 
+        recaptchaanswer = 'N3YS3'
+    if str(picture) == '/recaptcha/image3.png':
 
+        recaptchaanswer = 'YKPU3U'
+    if str(picture) == '/recaptcha/image4.png':
 
-                    flash('recaptcha passed')
-                    flash('Registered Successfully')
-                    print "step 2 register"
-                    user = User(username=form.username.data,
-                                password=form.password.data,
-                                welcomeMessage='',
-                                aboutme = '',
-                                pgp = '',
-                                pin = '',
-                                member_since = timestamp,
-                                email = ''
-                                )
+        recaptchaanswer = 'YS4ARE'
+    if str(picture) == '/recaptcha/image5.png':
 
-                    db.session.add(user)
-                    print "step 3 register"
-                    db.session.commit()
+        recaptchaanswer = 'VCKR'
+    if str(picture) == '/recaptcha/image6.png':
 
+        recaptchaanswer = 'YC3P'
+    if str(picture) == '/recaptcha/image7.png':
+
+        recaptchaanswer = 'U64YW'
+        flash('post test')
+        print recaptchaanswer
+        print str(form.recaptcha.data)
+    if request.method == 'POST':
+        if form.recaptcha.data == recaptchaanswer:
 
                     flash('Registered Successfully')
-                    return redirect(url_for('auth.login'))
+                    return redirect(url_for('index'))
+        else:
+            flash("recaptcha is wrong")
+            return redirect(url_for('auth.register'))
 
     return render_template('/auth/register.html', form=form, picture=picture)
 

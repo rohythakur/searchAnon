@@ -41,27 +41,6 @@ class RegistrationForm(Form):
 
                 return True
 
-    def validate_recaptcha(self, randompicture):
-
-
-
-        if randompicture == 'numbers1.jpg':
-            flash ('numbers1.jpg')
-            recaptchaanswer = 11111
-            if RegistrationForm.recaptcha == recaptchaanswer:
-                flash('recaptcha works!')
-                return True
-            else:
-                return False
-
-        if randompicture == 'numbers2.jpg':
-            flash ('numbers2.jpg')
-            recaptchaanswer = 22222
-            if RegistrationForm.recaptcha == recaptchaanswer:
-                flash('recaptcha works!')
-                return True
-            else:
-                return False
 
 
 class LoginForm(Form):
