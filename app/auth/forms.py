@@ -22,7 +22,7 @@ class RegistrationForm(Form):
 
 
     picture = '/recaptcha/' + str((random.choice(randompicture)))
-    print (str(picture))
+
     recaptchaanswer = StringField('Please enter the letters from picture abvove ', validators=[
         DataRequired()])
     submit = SubmitField('Register')
@@ -44,11 +44,10 @@ class RegistrationForm(Form):
             return True
 
 
-    def validate_recpatcha(self):
+    def validate_recpatcha(self, picture):
 
 
-        picture = '/recaptcha/' + str((random.choice(randompicture)))
-        print (str(picture))
+
         if str(picture) == '/recaptcha/image1.png':
             recaptchaa = 'CUXE'
 
@@ -117,7 +116,7 @@ class RegistrationFormTwo(Form):
 
 
     picture = '/recaptcha/' + str((random.choice(randompicture)))
-    print (str(picture))
+
     recaptchaanswer = StringField('Please enter the letters from picture abvove ', validators=[
         DataRequired()])
     submit = SubmitField('Register')
@@ -139,11 +138,11 @@ class RegistrationFormTwo(Form):
             return True
 
 
-    def validate_recpatcha(self):
+    def validate_recpatcha(self, picture):
 
 
-        picture = '/recaptcha/' + str((random.choice(randompicture)))
-        print (str(picture))
+
+
         if str(picture) == '/recaptcha/image1.png':
             recaptchaa = 'CUXE'
 
@@ -225,10 +224,8 @@ class LoginForm(Form):
             #self.username.errors.append("Invalid username or password")
             return False
 
-    def validate_recpatcha(self):
+    def validate_recpatcha(self, picture):
 
-        picture = '/recaptcha/' + str((random.choice(randompicture)))
-        print (str(picture))
         if str(picture) == '/recaptcha/image1.png':
             recaptchaa = 'CUXE'
 
@@ -311,10 +308,9 @@ class LoginFormTwo(Form):
             #self.username.errors.append("Invalid username or password")
             return False
 
-    def validate_recpatcha(self):
+    def validate_recpatcha(self, picture):
 
-        picture = '/recaptcha/' + str((random.choice(randompicture)))
-        print (str(picture))
+
         if str(picture) == '/recaptcha/image1.png':
             recaptchaa = 'CUXE'
 

@@ -25,7 +25,7 @@ def login():
 
     if request.method == 'POST':
         print "hi"
-        if form.validate_recpatcha():
+        if form.validate_recpatcha(form.picture):
             if form.validate_on_submit():
 
                 user = User.query.filter_by(username=form.username.data).first()
@@ -51,7 +51,7 @@ def loginTwo():
     form = LoginFormTwo(request.form)
 
     if request.method == 'POST':
-        if form.validate_recpatcha():
+        if form.validate_recpatcha(form.picture):
             if form.validate_on_submit():
 
                 user = User.query.filter_by(username=form.username.data).first()
@@ -77,16 +77,26 @@ def register():
     ##TODO RECAPTCHA
 
 
-    print "step 1 register"
+    print "page 1 register"
     form = RegistrationForm(request.form)
 
     if request.method == 'POST':
 
-        if form.validate_recpatcha():
+        if form.validate_recpatcha(form.picture):
+            print "registering .."
+            user = User(username=form.username.data,
+                        password=form.password.data,
+                        welcomeMessage='',
+                        aboutme='',
+                        pgp='',
+                        email='',
+                        member_since=timestamp,
+                        pin='')
+            db.session.add(user)
+            print "step 3 register"
+            db.session.commit()
 
 
-            print ("Works?")
-            flash('Registered Successfully')
 
             return redirect(url_for('index'))
         else:
@@ -103,16 +113,27 @@ def registertwo():
     ##TODO RECAPTCHA
 
 
-    print "step 1 register"
+    print "page 2 register"
     form = RegistrationFormTwo(request.form)
 
     if request.method == 'POST':
 
-        if form.validate_recpatcha():
+        print "tryingf.."
+        if form.validate_recpatcha(form.picture):
+            print "registering .."
+            user = User(username=form.username.data,
+                        password=form.password.data,
+                        welcomeMessage='',
+                        aboutme='',
+                        pgp='',
+                        email='',
+                        member_since=timestamp,
+                        pin='')
+            db.session.add(user)
+            print "step 3 register"
+            db.session.commit()
 
 
-            print ("Works?")
-            flash('Registered Successfully')
 
             return redirect(url_for('index'))
         else:
@@ -131,7 +152,7 @@ def security(username):
     ##TODO add recaptcva
     form = ChangePasswordForm(request.form)
     user = User.query.filter_by(username=username).first()
-    print ("here")
+
     if form.validate_on_submit():
          if current_user.verify_password(form.old_password.data):
             print ("info updated")
