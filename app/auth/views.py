@@ -3,11 +3,11 @@ from flask_login import current_user, logout_user, flash, login_user
 from . import auth
 from .. import db
 from ..models import User
-
-from .forms import ChangePasswordForm, RegistrationForm, LoginForm
+from .forms import ChangePasswordForm, RegistrationForm, RegistrationFormTwo, LoginForm
 from sqlalchemy.orm.exc import UnmappedInstanceError
 import random
 from datetime import datetime
+
 
 timestamp = datetime.today()
 
@@ -50,48 +50,48 @@ def register():
 
     print "step 1 register"
     form = RegistrationForm(request.form)
-    randompicture = ['image1.png','image2.png','image3.png','image4.png','image5.png','image6.png','image7.png',]
 
-    picture = '/recaptcha/' + str((random.choice(randompicture)))
-    print picture
-
-    if str(picture) == '/recaptcha/image1.png':
-
-        recaptchaanswer = 'CUXE'
-
-    if str(picture) == '/recaptcha/image2.png':
-
-        recaptchaanswer = 'N3YS3'
-    if str(picture) == '/recaptcha/image3.png':
-
-        recaptchaanswer = 'YKPU3U'
-    if str(picture) == '/recaptcha/image4.png':
-
-        recaptchaanswer = 'YS4ARE'
-    if str(picture) == '/recaptcha/image5.png':
-
-        recaptchaanswer = 'VCKR'
-    if str(picture) == '/recaptcha/image6.png':
-
-        recaptchaanswer = 'YC3P'
-    if str(picture) == '/recaptcha/image7.png':
-
-        recaptchaanswer = 'U64YW'
-        flash('post test')
-        print recaptchaanswer
-        print str(form.recaptcha.data)
     if request.method == 'POST':
-        if form.recaptcha.data == recaptchaanswer:
 
-                    flash('Registered Successfully')
-                    return redirect(url_for('index'))
+        if form.validate_recpatcha():
+
+
+            print ("Works?")
+            flash('Registered Successfully')
+
+            return redirect(url_for('index'))
         else:
-            flash("recaptcha is wrong")
+
+            print ("wrong going to retry")
+            return redirect(url_for('auth.registertwo'))
+
+    return render_template('/auth/register.html', form=form)
+
+
+
+@auth.route('/registertwo', methods=['GET', 'POST'])
+def registertwo():
+    ##TODO RECAPTCHA
+
+
+    print "step 1 register"
+    form = RegistrationFormTwo(request.form)
+
+    if request.method == 'POST':
+
+        if form.validate_recpatcha():
+
+
+            print ("Works?")
+            flash('Registered Successfully')
+
+            return redirect(url_for('index'))
+        else:
+            print ("wrong going back to first")
+
             return redirect(url_for('auth.register'))
 
-    return render_template('/auth/register.html', form=form, picture=picture)
-
-
+    return render_template('/auth/registertwo.html', form=form)
 
 
 
