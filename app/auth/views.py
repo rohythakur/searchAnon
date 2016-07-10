@@ -3,7 +3,7 @@ from flask_login import current_user, logout_user, flash, login_user
 from . import auth
 from .. import db
 from ..models import User
-from .forms import ChangePasswordForm, RegistrationForm, RegistrationFormTwo, LoginForm
+from .forms import ChangePasswordForm, RegistrationForm, RegistrationFormTwo, LoginForm, LoginFormTwo
 from sqlalchemy.orm.exc import UnmappedInstanceError
 import random
 from datetime import datetime
@@ -20,27 +20,56 @@ def before_request():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    ##TODO add recaptcva
+
     form = LoginForm(request.form)
+
     if request.method == 'POST':
-        print 'Post'
-        if form.validate_on_submit():
+        print "hi"
+        if form.validate_recpatcha():
+            if form.validate_on_submit():
 
-            user = User.query.filter_by(username=form.username.data).first()
-            if user is not None and user.verify_password(form.password_hash.data):
-                print "success"
-                login_user(user)
-                current_user.is_authenticated = True
-                print (user)
-                return redirect(url_for('index'))
+                user = User.query.filter_by(username=form.username.data).first()
+                if user is not None and user.verify_password(form.password_hash.data):
+                    print "success"
+                    login_user(user)
+                    current_user.is_authenticated = True
+                    print (user)
+                    return redirect(url_for('index'))
 
 
-            flash('Invalid username or password.')
-
+                flash('Invalid username or password.')
+        else:
+            print ("wrong going to retry")
+            return redirect(url_for('auth.loginTwo'))
 
 
     return render_template('auth/login.html', form=form)
 
+@auth.route('/logintwo', methods=['GET', 'POST'])
+def loginTwo():
+
+    form = LoginFormTwo(request.form)
+
+    if request.method == 'POST':
+        if form.validate_recpatcha():
+            if form.validate_on_submit():
+
+                user = User.query.filter_by(username=form.username.data).first()
+                if user is not None and user.verify_password(form.password_hash.data):
+                    print "success"
+                    login_user(user)
+                    current_user.is_authenticated = True
+                    print (user)
+                    return redirect(url_for('index'))
+
+
+                flash('Invalid username or password.')
+        else:
+            print ("wrong going to retry")
+            return redirect(url_for('auth.login'))
+
+
+    return render_template('auth/logintwo.html', form=form)
 
 
 @auth.route('/register', methods=['GET', 'POST'])

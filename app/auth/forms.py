@@ -202,7 +202,10 @@ class LoginForm(Form):
                                           'Usernames must have only letters, '
                                           'numbers, dots or underscores')], description="test")
     password_hash = PasswordField('', validators=[ DataRequired()])
-
+    picture = '/recaptcha/' + str((random.choice(randompicture)))
+    print (str(picture))
+    recaptchaanswer = StringField('Please enter the letters from picture abvove ', validators=[
+        DataRequired()])
     submit = SubmitField('Login')
 
 
@@ -222,7 +225,146 @@ class LoginForm(Form):
             #self.username.errors.append("Invalid username or password")
             return False
 
+    def validate_recpatcha(self):
 
+        picture = '/recaptcha/' + str((random.choice(randompicture)))
+        print (str(picture))
+        if str(picture) == '/recaptcha/image1.png':
+            recaptchaa = 'CUXE'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+
+        if str(picture) == '/recaptcha/image2.png':
+            recaptchaa = 'N3YS3'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+        if str(picture) == '/recaptcha/image3.png':
+            recaptchaa = 'YKPU3U'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+        if str(picture) == '/recaptcha/image4.png':
+            recaptchaa = 'YS4ARE'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+        if str(picture) == '/recaptcha/image5.png':
+            recaptchaa = 'VCKR'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+        if str(picture) == '/recaptcha/image6.png':
+            recaptchaa = 'YC3P'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+        if str(picture) == '/recaptcha/image7.png':
+            recaptchaa = 'U64YW'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+
+
+class LoginFormTwo(Form):
+
+    username = StringField('', validators=[
+        DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+                                          'Usernames must have only letters, '
+                                          'numbers, dots or underscores')], description="test")
+    password_hash = PasswordField('', validators=[ DataRequired()])
+    picture = '/recaptcha/' + str((random.choice(randompicture)))
+    print (str(picture))
+    recaptchaanswer = StringField('Please enter the letters from picture abvove ', validators=[
+        DataRequired()])
+    submit = SubmitField('Login')
+
+
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+
+    def validate(self):
+        if not Form.validate(self):
+            return False
+
+        user = User.query.filter_by(username=self.username.data.lower()).first()
+        if user and user.verify_password(self.password_hash.data):
+            return True
+
+        else:
+            flash('invalid username or password')
+            #self.username.errors.append("Invalid username or password")
+            return False
+
+    def validate_recpatcha(self):
+
+        picture = '/recaptcha/' + str((random.choice(randompicture)))
+        print (str(picture))
+        if str(picture) == '/recaptcha/image1.png':
+            recaptchaa = 'CUXE'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+
+        if str(picture) == '/recaptcha/image2.png':
+            recaptchaa = 'N3YS3'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+        if str(picture) == '/recaptcha/image3.png':
+            recaptchaa = 'YKPU3U'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+        if str(picture) == '/recaptcha/image4.png':
+            recaptchaa = 'YS4ARE'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+        if str(picture) == '/recaptcha/image5.png':
+            recaptchaa = 'VCKR'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+        if str(picture) == '/recaptcha/image6.png':
+            recaptchaa = 'YC3P'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
+        if str(picture) == '/recaptcha/image7.png':
+            recaptchaa = 'U64YW'
+
+            if recaptchaa == self.recaptchaanswer.data:
+                return True
+            else:
+                return False
 
 class ChangePasswordForm(Form):
     old_password = PasswordField('Old password', validators=[DataRequired()])

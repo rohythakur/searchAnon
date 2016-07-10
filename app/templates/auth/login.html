@@ -29,7 +29,8 @@
               <dl>
                 {{ render_field(form.username, placeholder="username", autocomplete="off") }}
                 {{ render_field(form.password_hash, placeholder="password", autocomplete="off") }}
-
+                      <br> <img src='{{ (form.picture) }}'  width="236px" height="48px" >
+                 {{ render_field(form.recaptchaanswer) }}
               </dl>
 
 
