@@ -51,27 +51,36 @@ def addurl():
     form = addlinkForm(request.form)
 
     print ("Create Item Page")
-    if request.method == 'POST' and form.validate():
-        items = Item(
-                    link="HTTP://" + form.link.data.upper() + ".ONION/",
-                    title = '',
-                    description = '',
-                    member_since=timestamp,
-                    click_count= '',
-                    last_updated=timestamp
-                    )
-        try:
-            db.session.add(items)
-            db.session.commit()
-            print ("Link Created")
-            flash('Website sucessfully added')
-            return redirect(url_for('user'))
-        except Exception as e:
-            print str(e)
-            flash('This website is already present on Zoom! ')
-            db.session.rollback()
-            db.session.flush()
+    if request.method == 'POST':
+        if form.validate():
+            if form.validate_recpatcha(form.picture):
+                items = Item(
+                            link="HTTP://" + form.link.data.upper() + ".ONION/",
+                            title = '',
+                            description = '',
+                            member_since=timestamp,
+                            click_count= '',
+                            last_updated=timestamp
+                            )
+                try:
+                    db.session.add(items)
+                    db.session.commit()
+                    print ("Link Created")
+                    flash('Website sucessfully added')
+                    return redirect(url_for('user'))
+                except Exception as e:
+                    print str(e)
 
+                    db.session.rollback()
+                    db.session.flush()
+            else:
+
+                flash("Bad Recaptcha! Please Try Again.  Robots Go Away")
+                return redirect(url_for('main.addurl'))
+        else:
+            print ("wrong going back to first")
+            flash("Error Uploading site! Already present in database ..")
+            return redirect(url_for('main.addurl'))
 
     return render_template('add.html', form=form)
 

@@ -6,10 +6,14 @@ from flask import flash
 import random
 
 randompicture = ['image1.png', 'image2.png', 'image3.png', 'image4.png', 'image5.png', 'image6.png',
-                 'image7.png', ]
+                 'image7.png']
+
+
+
+
 class RegistrationForm(Form):
     username = StringField('Username', validators=[
-        DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+        DataRequired(), Length(7, 25), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                                               'Usernames must have only letters, '
                                               'numbers, dots or underscores')])
     password = PasswordField('Password', validators=[
@@ -103,7 +107,7 @@ class RegistrationForm(Form):
 
 class RegistrationFormTwo(Form):
     username = StringField('Username', validators=[
-        DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+        DataRequired(), Length(7, 25), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                                               'Usernames must have only letters, '
                                               'numbers, dots or underscores')])
     password = PasswordField('Password', validators=[
@@ -117,7 +121,7 @@ class RegistrationFormTwo(Form):
 
     picture = '/recaptcha/' + str((random.choice(randompicture)))
 
-    recaptchaanswer = StringField('Please enter the letters from picture abvove ', validators=[
+    recaptchaanswer = StringField('Please enter the letters from picture above ', validators=[
         DataRequired()])
     submit = SubmitField('Register')
 
@@ -196,13 +200,13 @@ class RegistrationFormTwo(Form):
                 return False
 class LoginForm(Form):
 
-    username = StringField('', validators=[
-        DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+    username = StringField('User', validators=[
+        DataRequired(), Length(7, 25), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                                           'Usernames must have only letters, '
                                           'numbers, dots or underscores')], description="test")
     password_hash = PasswordField('', validators=[ DataRequired()])
     picture = '/recaptcha/' + str((random.choice(randompicture)))
-    print (str(picture))
+
     recaptchaanswer = StringField('Please enter the letters from picture abvove ', validators=[
         DataRequired()])
     submit = SubmitField('Login')
@@ -281,12 +285,12 @@ class LoginForm(Form):
 class LoginFormTwo(Form):
 
     username = StringField('', validators=[
-        DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+        DataRequired(), Length(7, 25), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                                           'Usernames must have only letters, '
                                           'numbers, dots or underscores')], description="test")
     password_hash = PasswordField('', validators=[ DataRequired()])
     picture = '/recaptcha/' + str((random.choice(randompicture)))
-    print (str(picture))
+
     recaptchaanswer = StringField('Please enter the letters from picture abvove ', validators=[
         DataRequired()])
     submit = SubmitField('Login')

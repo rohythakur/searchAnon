@@ -28,7 +28,8 @@
   <dl>
 
     {{ render_field(form.link) }}
-
+          <br> <img src='{{ (form.picture) }}'  width="236px" height="48px" >
+      {{ render_field(form.recaptchaanswer) }}
 
 
               {% else %}

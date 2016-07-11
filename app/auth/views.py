@@ -8,23 +8,20 @@ from sqlalchemy.orm.exc import UnmappedInstanceError
 import random
 from datetime import datetime
 
-
+##TODO Recaptchas need to be cleared ...
 timestamp = datetime.today()
 
 
 @auth.before_request
 def before_request():
-    #current_user.ping()
+
     g.user = current_user
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-
     form = LoginForm(request.form)
-
     if request.method == 'POST':
-        print "hi"
         if form.validate_recpatcha(form.picture):
             if form.validate_on_submit():
 
@@ -35,11 +32,15 @@ def login():
                     current_user.is_authenticated = True
                     print (user)
                     return redirect(url_for('index'))
+                else:
+                    flash("Please enter username/password again")
+                    return redirect(url_for('auth.loginTwo'))
+            else:
+                flash("Form Error.  Please Try again")
+                return redirect(url_for('auth.loginTwo'))
 
-
-                flash('Invalid username or password.')
         else:
-            print ("wrong going to retry")
+            flash("Please retry Recaptcha")
             return redirect(url_for('auth.loginTwo'))
 
 
@@ -47,9 +48,7 @@ def login():
 
 @auth.route('/logintwo', methods=['GET', 'POST'])
 def loginTwo():
-
     form = LoginFormTwo(request.form)
-
     if request.method == 'POST':
         if form.validate_recpatcha(form.picture):
             if form.validate_on_submit():
@@ -63,83 +62,89 @@ def loginTwo():
                     return redirect(url_for('index'))
 
 
-                flash('Invalid username or password.')
-        else:
-            print ("wrong going to retry")
-            return redirect(url_for('auth.login'))
+                else:
+                        flash('Invalid username or password.')
+                        return redirect(url_for('auth.login'))
+            else:
+                flash("Form Error.  Please Try again")
+                return redirect(url_for('auth.login'))
 
+        else:
+            flash("Please retry Recaptcha")
+            return redirect(url_for('auth.login'))
 
     return render_template('auth/logintwo.html', form=form)
 
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
-    ##TODO RECAPTCHA
-
-
-    print "page 1 register"
     form = RegistrationForm(request.form)
 
     if request.method == 'POST':
 
-        if form.validate_recpatcha(form.picture):
-            print "registering .."
-            user = User(username=form.username.data,
-                        password=form.password.data,
-                        welcomeMessage='',
-                        aboutme='',
-                        pgp='',
-                        email='',
-                        member_since=timestamp,
-                        pin='')
-            db.session.add(user)
-            print "step 3 register"
-            db.session.commit()
+            if form.validate_username():
+                if form.validate_recpatcha(form.picture):
+
+                    user = User(username=form.username.data,
+                                password=form.password.data,
+                                welcomeMessage='',
+                                aboutme='',
+                                pgp='',
+                                email='',
+                                member_since=timestamp,
+                                pin='')
+                    db.session.add(user)
+
+                    db.session.commit()
 
 
 
-            return redirect(url_for('index'))
-        else:
-
-            print ("wrong going to retry")
-            return redirect(url_for('auth.registertwo'))
-
+                    return redirect(url_for('auth.login'))
+                else:
+                    flash("Please retry Recaptcha")
+                    return redirect(url_for('auth.registertwo'))
+            else:
+                flash("Username in use")
+                return redirect(url_for('auth.registertwo'))
     return render_template('/auth/register.html', form=form)
 
 
 
 @auth.route('/registertwo', methods=['GET', 'POST'])
 def registertwo():
-    ##TODO RECAPTCHA
+
 
 
     print "page 2 register"
     form = RegistrationFormTwo(request.form)
 
     if request.method == 'POST':
+        if form.validate_username():
+            if form.validate_recpatcha(form.picture):
 
-        print "tryingf.."
-        if form.validate_recpatcha(form.picture):
-            print "registering .."
-            user = User(username=form.username.data,
-                        password=form.password.data,
-                        welcomeMessage='',
-                        aboutme='',
-                        pgp='',
-                        email='',
-                        member_since=timestamp,
-                        pin='')
-            db.session.add(user)
-            print "step 3 register"
-            db.session.commit()
+                user = User(username=form.username.data,
+                            password=form.password.data,
+                            welcomeMessage='',
+                            aboutme='',
+                            pgp='',
+                            email='',
+                            member_since=timestamp,
+                            pin='')
+                db.session.add(user)
 
+                db.session.commit()
 
+                return redirect(url_for('auth.login'))
 
-            return redirect(url_for('index'))
+            else:
+
+                flash("Please retry Recaptcha")
+                return redirect(url_for('auth.register'))
         else:
-            print ("wrong going back to first")
 
+            print ("Username in use")
             return redirect(url_for('auth.register'))
+
 
     return render_template('/auth/registertwo.html', form=form)
 
@@ -149,7 +154,6 @@ def registertwo():
 
 @auth.route('/security/<username>', methods=['GET', 'POST'])
 def security(username):
-    ##TODO add recaptcva
     form = ChangePasswordForm(request.form)
     user = User.query.filter_by(username=username).first()
 
