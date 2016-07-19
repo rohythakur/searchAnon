@@ -24,7 +24,7 @@ def login():
     if request.method == 'POST' and form.validate_on_submit():
             if form.validate_recpatcha(form.picture):
 
-                user = User.query.filter_by(username=form.username.data.lower()).first()
+                user = User.query.filter_by(username=form.username.data).first()
                 if user is not None and user.verify_password(form.password_hash.data):
                     print "success"
                     login_user(user)
@@ -75,7 +75,7 @@ def register():
 
         if form.validate_recpatcha(form.picture):
 
-            user = User(username=form.username.data.lower(),
+            user = User(username=form.username.data,
                         password=form.password.data,
                         welcomeMessage='',
                         aboutme='',
@@ -110,7 +110,7 @@ def registertwo():
     if request.method == 'POST' and form.validate():
             if form.validate_recpatcha(form.picture):
 
-                user = User(username=form.username.data.lower(),
+                user = User(username=form.username.data,
                             password=form.password.data,
                             welcomeMessage='',
                             aboutme='',

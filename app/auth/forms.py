@@ -34,7 +34,7 @@ class RegistrationForm(Form):
             return False
 
 
-        username = User.query.filter(User.username == self.username.data.lower()).first()
+        username = User.query.filter(User.username == self.username.data).first()
         print self.username.data.lower
         if username:
             # self.username.errors.append("Invalid username or password")
@@ -127,7 +127,7 @@ class RegistrationFormTwo(Form):
         if not rv:
             return False
 
-        username = User.query.filter(User.username == self.username.data.lower()).first()
+        username = User.query.filter(User.username == self.username.data).first()
         print self.username.data.lower
         if username:
             # self.username.errors.append("Invalid username or password")
@@ -217,7 +217,7 @@ class LoginForm(Form):
         if not rv:
             return False
 
-        user = User.query.filter_by(username=self.username.data.lower()).first()
+        user = User.query.filter_by(username=self.username.data).first()
         if user and user.verify_password(self.password_hash.data):
 
             return True
@@ -303,7 +303,7 @@ class LoginFormTwo(Form):
             print "wrong two"
             return False
 
-        user = User.query.filter_by(username=self.username.data.lower()).first()
+        user = User.query.filter_by(username=self.username.data).first()
         if user and user.verify_password(self.password_hash.data):
             return True
 
