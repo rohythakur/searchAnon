@@ -13,28 +13,26 @@ randompicture = ['image1.png', 'image2.png', 'image3.png', 'image4.png', 'image5
 
 class RegistrationForm(Form):
     username = StringField('Username', validators=[
-        DataRequired(), Length(7, 25), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
-                                              'Usernames must have only letters, '
-                                              'numbers, dots or underscores')])
+        DataRequired(), Length(7, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+                                          'Searches must have only letters, '
+                                          'numbers, dots or underscores')])
     password = PasswordField('Password', validators=[
-        DataRequired(), EqualTo('password2', message='Passwords must match.')])
+        DataRequired(), Length(7, 64), EqualTo('password2', message='Passwords must match.')])
     password2 = PasswordField('Confirm password', validators=[DataRequired()])
-
-    welcomeMessage = StringField('Welcome Message', [validators.Length(min=10, max=64)])
-
-    pin = (StringField('Enter your personal pin', [validators.Length(min=4, max=4)]))
-
 
     picture = '/recaptcha/' + str((random.choice(randompicture)))
 
     recaptchaanswer = StringField('Please enter the letters from picture abvove ', validators=[
         DataRequired()])
-    submit = SubmitField('Register')
+
 
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
+    def validate(self):
+        rv = Form.validate(self)
+        if not rv:
+            return False
 
-    def validate_username(self):
 
         username = User.query.filter(User.username == self.username.data.lower()).first()
         print self.username.data.lower
@@ -107,28 +105,27 @@ class RegistrationForm(Form):
 
 class RegistrationFormTwo(Form):
     username = StringField('Username', validators=[
-        DataRequired(), Length(7, 25), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+        DataRequired(), validators.Length(7, 25), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                                               'Usernames must have only letters, '
                                               'numbers, dots or underscores')])
     password = PasswordField('Password', validators=[
         DataRequired(), EqualTo('password2', message='Passwords must match.')])
     password2 = PasswordField('Confirm password', validators=[DataRequired()])
 
-    welcomeMessage = StringField('Welcome Message', [validators.Length(min=10, max=64)])
-
-    pin = (StringField('Enter your personal pin', [validators.Length(min=4, max=4)]))
-
 
     picture = '/recaptcha/' + str((random.choice(randompicture)))
 
     recaptchaanswer = StringField('Please enter the letters from picture above ', validators=[
         DataRequired()])
-    submit = SubmitField('Register')
+
 
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
 
-    def validate_username(self):
+    def validate(self):
+        rv = Form.validate(self)
+        if not rv:
+            return False
 
         username = User.query.filter(User.username == self.username.data.lower()).first()
         print self.username.data.lower
@@ -201,7 +198,7 @@ class RegistrationFormTwo(Form):
 class LoginForm(Form):
 
     username = StringField('User', validators=[
-        DataRequired(), Length(7, 25), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+        DataRequired(), Length(1, 25), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                                           'Usernames must have only letters, '
                                           'numbers, dots or underscores')], description="test")
     password_hash = PasswordField('', validators=[ DataRequired()])
@@ -216,15 +213,17 @@ class LoginForm(Form):
         Form.__init__(self, *args, **kwargs)
 
     def validate(self):
-        if not Form.validate(self):
+        rv = Form.validate(self)
+        if not rv:
             return False
 
         user = User.query.filter_by(username=self.username.data.lower()).first()
         if user and user.verify_password(self.password_hash.data):
+
             return True
 
         else:
-            flash('invalid username or password')
+            flash("Invalid username or password")
             #self.username.errors.append("Invalid username or password")
             return False
 
@@ -301,6 +300,7 @@ class LoginFormTwo(Form):
 
     def validate(self):
         if not Form.validate(self):
+            print "wrong two"
             return False
 
         user = User.query.filter_by(username=self.username.data.lower()).first()
@@ -309,7 +309,7 @@ class LoginFormTwo(Form):
 
         else:
             flash('invalid username or password')
-            #self.username.errors.append("Invalid username or password")
+            self.username.errors.append("Invalid username or password")
             return False
 
     def validate_recpatcha(self, picture):

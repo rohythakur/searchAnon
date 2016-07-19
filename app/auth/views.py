@@ -21,9 +21,9 @@ def before_request():
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm(request.form)
-    if request.method == 'POST':
-        if form.validate_recpatcha(form.picture):
-            if form.validate_on_submit():
+    if request.method == 'POST' and form.validate_on_submit():
+            if form.validate_recpatcha(form.picture):
+
 
                 user = User.query.filter_by(username=form.username.data).first()
                 if user is not None and user.verify_password(form.password_hash.data):
@@ -32,16 +32,11 @@ def login():
                     current_user.is_authenticated = True
                     print (user)
                     return redirect(url_for('index'))
-                else:
-                    flash("Please enter username/password again")
-                    return redirect(url_for('auth.loginTwo'))
-            else:
-                flash("Form Error.  Please Try again")
-                return redirect(url_for('auth.loginTwo'))
 
-        else:
-            flash("Please retry Recaptcha")
-            return redirect(url_for('auth.loginTwo'))
+
+            else:
+                flash("Please retry Recaptcha")
+                return redirect(url_for('auth.loginTwo'))
 
 
     return render_template('auth/login.html', form=form)
@@ -49,9 +44,9 @@ def login():
 @auth.route('/logintwo', methods=['GET', 'POST'])
 def loginTwo():
     form = LoginFormTwo(request.form)
-    if request.method == 'POST':
-        if form.validate_recpatcha(form.picture):
-            if form.validate_on_submit():
+    if request.method == 'POST' and form.validate_on_submit():
+            if form.validate_recpatcha(form.picture):
+
 
                 user = User.query.filter_by(username=form.username.data).first()
                 if user is not None and user.verify_password(form.password_hash.data):
@@ -62,16 +57,12 @@ def loginTwo():
                     return redirect(url_for('index'))
 
 
-                else:
-                        flash('Invalid username or password.')
-                        return redirect(url_for('auth.login'))
-            else:
-                flash("Form Error.  Please Try again")
-                return redirect(url_for('auth.login'))
 
-        else:
-            flash("Please retry Recaptcha")
-            return redirect(url_for('auth.login'))
+
+
+            else:
+                flash("Please retry Recaptcha")
+                return redirect(url_for('auth.login'))
 
     return render_template('auth/logintwo.html', form=form)
 
@@ -80,32 +71,31 @@ def loginTwo():
 def register():
     form = RegistrationForm(request.form)
 
-    if request.method == 'POST':
+    print "registyer"
+    if request.method == 'POST' and form.validate_on_submit():
 
-            if form.validate_username():
-                if form.validate_recpatcha(form.picture):
+        if form.validate_recpatcha(form.picture):
 
-                    user = User(username=form.username.data,
-                                password=form.password.data,
-                                welcomeMessage='',
-                                aboutme='',
-                                pgp='',
-                                email='',
-                                member_since=timestamp,
-                                pin='')
-                    db.session.add(user)
+            user = User(username=form.username.data,
+                        password=form.password.data,
+                        welcomeMessage='',
+                        aboutme='',
+                        pgp='',
+                        email='',
+                        member_since=timestamp,
+                        pin='')
+            db.session.add(user)
 
-                    db.session.commit()
+            db.session.commit()
+
+            flash("Registered Succesfully")
+            return redirect(url_for('auth.login'))
+        else:
+            flash("Please retry Recaptcha")
+            return redirect(url_for('auth.registertwo'))
 
 
 
-                    return redirect(url_for('auth.login'))
-                else:
-                    flash("Please retry Recaptcha")
-                    return redirect(url_for('auth.registertwo'))
-            else:
-                flash("Username in use")
-                return redirect(url_for('auth.registertwo'))
     return render_template('/auth/register.html', form=form)
 
 
@@ -118,8 +108,7 @@ def registertwo():
     print "page 2 register"
     form = RegistrationFormTwo(request.form)
 
-    if request.method == 'POST':
-        if form.validate_username():
+    if request.method == 'POST' and form.validate():
             if form.validate_recpatcha(form.picture):
 
                 user = User(username=form.username.data,
@@ -140,10 +129,7 @@ def registertwo():
 
                 flash("Please retry Recaptcha")
                 return redirect(url_for('auth.register'))
-        else:
 
-            print ("Username in use")
-            return redirect(url_for('auth.register'))
 
 
     return render_template('/auth/registertwo.html', form=form)
