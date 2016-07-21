@@ -10,7 +10,6 @@ randompicture = ['image1.png', 'image2.png', 'image3.png', 'image4.png', 'image5
 
 
 
-
 class RegistrationForm(Form):
     username = StringField('Username', validators=[
         DataRequired(), Length(7, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
@@ -33,15 +32,15 @@ class RegistrationForm(Form):
         if not rv:
             return False
 
-
+        print "hello worlkd"
         username = User.query.filter(User.username == self.username.data).first()
-        print self.username.data.lower
+
         if username:
-            # self.username.errors.append("Invalid username or password")
+            self.username.errors.append("Invalid username or password")
             flash('username taken')
             return False
         else:
-
+            print "doesnt work 1"
 
             return True
 
@@ -127,14 +126,16 @@ class RegistrationFormTwo(Form):
         if not rv:
             return False
 
+
         username = User.query.filter(User.username == self.username.data).first()
-        print self.username.data.lower
+
         if username:
-            # self.username.errors.append("Invalid username or password")
+            print "Hello world again"
+            self.username.errors.append("Invalid username or password")
             flash('username taken')
             return False
         else:
-
+            print "doesnt work 2"
 
             return True
 
@@ -365,13 +366,11 @@ class LoginFormTwo(Form):
                 return True
             else:
                 return False
-
+##TODO Work on change password form
 class ChangePasswordForm(Form):
     old_password = PasswordField('Old password', validators=[DataRequired()])
     password = PasswordField('New password', validators=[
         DataRequired(), EqualTo('password2', message='Passwords must match')])
     password2 = PasswordField('Confirm new password', validators=[DataRequired()])
-    welcomeM = StringField('Welcome Message', validators=[Length(1, 64)])
+
     submit = SubmitField('Update Password')
-
-

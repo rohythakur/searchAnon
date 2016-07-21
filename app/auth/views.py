@@ -8,7 +8,7 @@ from sqlalchemy.orm.exc import UnmappedInstanceError
 import random
 from datetime import datetime
 
-##TODO Recaptchas need to be cleared ...
+
 timestamp = datetime.today()
 
 
@@ -75,7 +75,7 @@ def register():
 
         if form.validate_recpatcha(form.picture):
 
-            user = User(username=form.username.data,
+            user = User(username=form.username.data.lower(),
                         password=form.password.data,
                         welcomeMessage='',
                         aboutme='',
@@ -110,7 +110,7 @@ def registertwo():
     if request.method == 'POST' and form.validate():
             if form.validate_recpatcha(form.picture):
 
-                user = User(username=form.username.data,
+                user = User(username=form.username.data.lower(),
                             password=form.password.data,
                             welcomeMessage='',
                             aboutme='',
@@ -135,24 +135,29 @@ def registertwo():
 
 
 
-
+##TODO Work on change password view
 
 @auth.route('/security/<username>', methods=['GET', 'POST'])
 def security(username):
     form = ChangePasswordForm(request.form)
     user = User.query.filter_by(username=username).first()
-
+    print (str(user))
     if form.validate_on_submit():
+         print (str(user))
+         print "form validated"
          if current_user.verify_password(form.old_password.data):
-            print ("info updated")
+
+
             user.password = form.password.data
-            user.welcomeM = form.welcomeM.data
+
 
             db.session.add(user)
             db.session.commit()
             flash('Password updated')
 
             return redirect(url_for('main.user', username=current_user.username))
+         else:
+             flash("old password wrong")
     return render_template('/auth/security.html', user=user, form=form)
 
 
