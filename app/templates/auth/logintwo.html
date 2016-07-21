@@ -1,0 +1,53 @@
+{% extends "/mainholders/plain.html" %}
+{% from "/auth/_formhelpers.html" import render_field %}
+{% block content %}
+
+
+    <div id="loginorregister">Login</div>
+
+    <h1>Register</h1>
+
+    <div id="loginorregisterright">
+
+    <div id="loginwindow">
+
+        {% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    {% for message in messages %}
+		  <div class="alert alert-warning alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			{{message}}
+		  </div>
+		{% endfor %}
+	  {% endif %}
+	{% endwith %}
+
+
+
+                <img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="50" height="50">
+            <form method="post" action="/auth/logintwo">
+              <dl>
+                {{ render_field(form.username, placeholder="username", autocomplete="off") }}
+                {{ render_field(form.password_hash, placeholder="password", autocomplete="off") }}
+                      <br> <img src='{{ (form.picture) }}'  width="236px" height="48px" >
+                 {{ render_field(form.recaptchaanswer) }}
+              </dl>
+
+
+
+
+
+                        <input class="btn btn-danger" type="submit" value=login>
+            </form>
+
+
+                <br>
+
+
+            </div>
+
+
+    </div>
+
+
+{% endblock %}

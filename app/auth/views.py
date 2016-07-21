@@ -145,13 +145,14 @@ def security(username):
     if form.validate_on_submit():
          print (str(user))
          print "form validated"
+         user = User.query.filter_by(username=username).first()
          if current_user.verify_password(form.old_password.data):
 
 
-            user.password = form.password.data
+            current_user.password = form.password.data
 
 
-            db.session.add(user)
+            db.session.add(current_user)
             db.session.commit()
             flash('Password updated')
 
