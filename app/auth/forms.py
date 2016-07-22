@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, Length,  Regexp, EqualTo
 from ..models import User
 from flask import flash
 import random
-
+from sqlalchemy import func
 randompicture = ['image1.png', 'image2.png', 'image3.png', 'image4.png', 'image5.png', 'image6.png',
                  'image7.png']
 
@@ -33,7 +33,7 @@ class RegistrationForm(Form):
             return False
 
         print "hello worlkd"
-        username = User.query.filter(User.username == self.username.data).first()
+        username = User.query.filter(func.lower(User.username) == func.lower(self.username.data)).first()
 
         if username:
             self.username.errors.append("Invalid username or password")
@@ -127,7 +127,7 @@ class RegistrationFormTwo(Form):
             return False
 
 
-        username = User.query.filter(User.username == self.username.data).first()
+        username = User.query.filter(func.lower(User.username == self.username.data)).first()
 
         if username:
             print "Hello world again"
@@ -366,11 +366,11 @@ class LoginFormTwo(Form):
                 return True
             else:
                 return False
-##TODO Work on change password form
+
 class ChangePasswordForm(Form):
     old_password = PasswordField('Old password', validators=[DataRequired()])
     password = PasswordField('New password', validators=[
-        DataRequired(), EqualTo('password2', message='Passwords must match')])
+        DataRequired(), Length(7, 64),EqualTo('password2', message='Passwords must match')])
     password2 = PasswordField('Confirm new password', validators=[DataRequired()])
 
     submit = SubmitField('Update Password')

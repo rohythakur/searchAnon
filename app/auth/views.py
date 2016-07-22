@@ -75,7 +75,7 @@ def register():
 
         if form.validate_recpatcha(form.picture):
 
-            user = User(username=form.username.data.lower(),
+            user = User(username=form.username.data,
                         password=form.password.data,
                         welcomeMessage='',
                         aboutme='',
@@ -93,24 +93,19 @@ def register():
             flash("Please retry Recaptcha")
             return redirect(url_for('auth.registertwo'))
 
-
-
     return render_template('/auth/register.html', form=form)
 
 
 
 @auth.route('/registertwo', methods=['GET', 'POST'])
 def registertwo():
-
-
-
     print "page 2 register"
     form = RegistrationFormTwo(request.form)
 
     if request.method == 'POST' and form.validate():
             if form.validate_recpatcha(form.picture):
 
-                user = User(username=form.username.data.lower(),
+                user = User(username=form.username.data,
                             password=form.password.data,
                             welcomeMessage='',
                             aboutme='',
@@ -119,11 +114,8 @@ def registertwo():
                             member_since=timestamp,
                             pin='')
                 db.session.add(user)
-
                 db.session.commit()
-
                 return redirect(url_for('auth.login'))
-
             else:
 
                 flash("Please retry Recaptcha")
@@ -135,7 +127,7 @@ def registertwo():
 
 
 
-##TODO Work on change password view
+##TODO ADD Recaptcha
 
 @auth.route('/security/<username>', methods=['GET', 'POST'])
 def security(username):
@@ -172,7 +164,6 @@ def myonions(username):
 @auth.route("/logout", methods=["GET"])
 def logout():
     try:
-
         logout_user()
 
         print "logged out"
