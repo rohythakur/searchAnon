@@ -75,12 +75,10 @@ def addurl():
                     db.session.flush()
             else:
 
-                flash("Bad Recaptcha! Please Try Again.  Robots Go Away")
+                flash("Bad Recaptcha or Link! Please Try Again.  Robots Go Away")
                 return redirect(url_for('main.addurl'))
-        else:
-            print ("wrong going back to first")
-            flash("Error Uploading site! Already present in database ..")
-            return redirect(url_for('main.addurl'))
+
+
 
     return render_template('add.html', form=form)
 

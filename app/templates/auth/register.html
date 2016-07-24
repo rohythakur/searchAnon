@@ -1,21 +1,15 @@
 {% extends "/mainholders/plain.html" %}
 {% from "/auth/_formhelpers.html" import render_field %}
 {% block content %}
- <div id = 'topbar'>
- <a href="{{ url_for('index') }}">
-        <img src="{{ url_for('static', filename='/images/AllInOneIcon.png') }}" width="100px" height="100px">
-</a>
- </div>
 
 
-
-    <div id="loginorregister">Login</div>
+    <div id="loginorregister">Register</div>
 
 
 
     <div id="loginorregisterright">
 
-
+<div id="centerauthforms">
     <h1>Register</h1>
        	{% with messages = get_flashed_messages() %}
 	  {% if messages %}
@@ -30,13 +24,13 @@
 
 <form method=post action="/auth/register">
   <dl>
-    {{ render_field(form.username) }}
-    {{ render_field(form.password) }}
-    {{ render_field(form.password2) }}
+    {{ render_field(form.username,placeholder="Username", autocomplete="off") }}
+    {{ render_field(form.password,placeholder="Password", autocomplete="off") }}
+    {{ render_field(form.password2,placeholder="Confirm Password", autocomplete="off") }}
 
 
       <br> <img src='{{ (form.picture) }}'  width="236px" height="48px" >
-      {{ render_field(form.recaptchaanswer) }}
+      {{ render_field(form.recaptchaanswer,placeholder="Captcha Answer", autocomplete="off") }}
     </dl>
 
 
@@ -46,6 +40,6 @@
   <p><input class="btn btn-danger" type=submit value=Register>
 
 </form>
-</div>
+</div></div>
 
 {% endblock %}

@@ -2,47 +2,51 @@
 {% from "/auth/_formhelpers.html" import render_field %}
 {% block content %}
 
-        <div id="loginorregister">Login</div>
+<div id="loginorregister">Login</div>
+
+
+        <div id="adderrorbox">
+
+
+                    {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %}
+                      <div class="alert alert-warning alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        {{message}}
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+        </div>
+                        <div id="loginregisteradd">
+                        <div id="centerauthforms">
+
+                            {% if current_user.is_authenticated %}
+                            <form method="post" action="/main/addurl">
+                              <dl>
+
+                                {{ render_field(form.link) }}
+                                      <br> <img src='{{ (form.picture) }}'  width="236px" height="48px" >
+                                  {{ render_field(form.recaptchaanswer) }}
+                                <br><br>
+                                                   <input class="btn btn-danger" type="submit" value='add'>
+
+                                          {% else %}
+                                              <h4>Please Login/Register</h4>
+                                              <div id ="usernameorloginadd"><a href="{{ url_for('auth.login') }}">Login</a></div>
+                                              <div id ="logoutorregisteradd"><a href="{{ url_for('auth.register') }}">Register</a></div>
+
+                                          {% endif %}
 
 
 
-    <div id="loginorregisterright">
-              {% if current_user.is_authenticated %}
+                              </dl>
 
 
+                            </form>
+                        </div></div>
+                        </div>
 
-    <br><br><br><br><br><br><br><br>
-       	{% with messages = get_flashed_messages() %}
-	  {% if messages %}
-	    {% for message in messages %}
-		  <div class="alert alert-warning alert-dismissible" role="alert">
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-			{{message}}
-		  </div>
-		{% endfor %}
-	  {% endif %}
-	{% endwith %}
-
-
-<form method="post" action="/main/addurl">
-  <dl>
-
-    {{ render_field(form.link) }}
-          <br> <img src='{{ (form.picture) }}'  width="236px" height="48px" >
-      {{ render_field(form.recaptchaanswer) }}
-
-
-              {% else %}
-                  <div id ="usernameorlogin"><a href="{{ url_for('auth.login') }}">Login</a></div>
-                  <div id ="logoutorregister"><a href="{{ url_for('auth.register') }}">Register</a></div>
-
-              {% endif %}
-
-
-
-  </dl>
-  <p><input class="btn btn-danger" type="submit" value='add'>
-
-</form>
 </div>
 {% endblock %}

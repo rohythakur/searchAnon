@@ -127,31 +127,64 @@ def registertwo():
 
 
 
-##TODO ADD Recaptcha
-
 @auth.route('/security/<username>', methods=['GET', 'POST'])
 def security(username):
     form = ChangePasswordForm(request.form)
     user = User.query.filter_by(username=username).first()
     print (str(user))
     if form.validate_on_submit():
-         print (str(user))
-         print "form validated"
-         user = User.query.filter_by(username=username).first()
-         if current_user.verify_password(form.old_password.data):
+        if form.validate_recpatcha(form.picture):
+             print (str(user))
+             print "form validated"
+             user = User.query.filter_by(username=username).first()
+             if current_user.verify_password(form.old_password.data):
 
 
-            current_user.password = form.password.data
+                current_user.password = form.password.data
 
 
-            db.session.add(current_user)
-            db.session.commit()
-            flash('Password updated')
+                db.session.add(current_user)
+                db.session.commit()
+                flash('Password updated')
 
-            return redirect(url_for('main.user', username=current_user.username))
-         else:
-             flash("old password wrong")
+                return redirect(url_for('main.user', username=current_user.username))
+             else:
+                 flash("invalid recapthca/password")
+                 return redirect(url_for('auth.securitytwo', username=current_user.username))
+        else:
+            flash("invalid recapthca/password")
+            return redirect(url_for('auth.securitytwo', current_user.username))
     return render_template('/auth/security.html', user=user, form=form)
+
+
+@auth.route('/securitytwo/<username>', methods=['GET', 'POST'])
+def securitytwo(username):
+    form = ChangePasswordForm(request.form)
+    user = User.query.filter_by(username=username).first()
+    print (str(user))
+    if form.validate_on_submit():
+        if form.validate_recpatcha(form.picture):
+             print (str(user))
+             print "form validated"
+             user = User.query.filter_by(username=username).first()
+             if current_user.verify_password(form.old_password.data):
+
+
+                current_user.password = form.password.data
+
+
+                db.session.add(current_user)
+                db.session.commit()
+                flash('Password updated')
+
+                return redirect(url_for('main.user', username=current_user.username))
+             else:
+                 flash("invalid recapthca/password")
+                 return redirect(url_for('auth.security', username=current_user.username))
+        else:
+            flash("invalid recapthca/password")
+            return redirect(url_for('auth.security', username=current_user.username))
+    return render_template('/auth/securitytwo.html', user=user, form=form)
 
 
 @auth.route('/onions/<username>', methods=['GET', 'POST'])

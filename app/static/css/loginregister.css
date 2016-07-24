@@ -2,21 +2,60 @@
 
 #loginorregister{
     position: absolute;
-     width: 50%;
-     margin-left: 20px;
-     top: 200px;
-     height: 100px;
-     font: 20px arial, sans-serif;
-     background-color: #ffffff;
+    width: 50%;
+    margin-left: 20px;
+    top: 200px;
+    right: 50%;
+    height: 100px;
+    font: 20px arial, sans-serif;
+    background-color: green;
 }
+
+
+
 
 #loginorregisterright{
     position: absolute;
-     width: 50%;
-     top: 200px;
+    width: 50%;
+    top: 200px;
 
-     height: 100px;
-     left: 50%;
-     background-color: #ffffff;
+    height: 400px;
+    left: 50%;
+    background-color: blue;
 }
+#adderrorbox{
+     position: absolute;
+    width: 50%;
+    top: 200px;
+    height: 50px;
+    left: 50%;
+    background-color: red;
+    margin-right: 20px;
+}
+#loginregisteradd{
+    position: absolute;
+    width: 50%;
+    top: 250px;
+    margin-right: 20px;
+    height: 400px;
+    left: 50%;
+    background-color: yellow;
+}
+#centerauthforms{
+    position: relative;
+     text-align: center;
 
+    background-color: pink;
+}
+#usernameorloginadd{
+    position: relative;
+     text-align: center;
+
+    background-color: pink;
+}
+#logoutorregisteradd{
+    position: relative;
+     text-align: center;
+
+    background-color: pink;
+}
